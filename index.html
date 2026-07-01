@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="index, follow">
 <link rel="canonical" href="https://aiapc-site.vercel.app/">
 
 <!-- ── TITLE & META ── -->
@@ -1111,7 +1111,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
           <div style="font-size:1.4rem;margin-bottom:.65rem">✉️</div>
           <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Email</div>
           <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">For anything that doesn't fit a form.</p>
-          <a href="mailto:hello@aiisapieceofcake.com" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">hello@aiisapieceofcake.com</a>
+          <a href="mailto:collins.ra@northeastern.edu" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">collins.ra@northeastern.edu</a>
         </div>
         <div class="aud-card">
           <div style="font-size:1.4rem;margin-bottom:.65rem">🐦</div>
@@ -1129,7 +1129,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
 
       <!-- CONTACT FORM -->
       <div class="sec-label" style="margin-bottom:1rem">Send a Message</div>
-      <form id="contact-form" action="https://formspree.io/f/placeholder" method="POST" style="max-width:680px" onsubmit="handleContactSubmit(event)">
+      <form id="contact-form" action="mailto:collins.ra@northeastern.edu" method="POST" style="max-width:680px" onsubmit="handleContactSubmit(event)">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
           <div>
             <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-name">Name</label>
@@ -1244,35 +1244,19 @@ function handleContactSubmit(e) {
   e.preventDefault();
   var form = e.target;
   var status = document.getElementById('cf-status');
-  var btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-  var data = new FormData(form);
-  fetch(form.action, {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(function(r) {
-    if (r.ok) {
-      status.style.display = 'block';
-      status.style.background = 'rgba(82,112,85,.12)';
-      status.style.color = 'var(--sage)';
-      status.style.border = '1px solid rgba(82,112,85,.3)';
-      status.textContent = 'Message sent — we'll be in touch within 1–2 business days.';
-      form.reset();
-    } else {
-      throw new Error('Server error');
-    }
-  }).catch(function() {
-    status.style.display = 'block';
-    status.style.background = 'rgba(184,78,104,.08)';
-    status.style.color = 'var(--rose)';
-    status.style.border = '1px solid rgba(184,78,104,.25)';
-    status.textContent = 'Something went wrong. Please email hello@aiisapieceofcake.com directly.';
-  }).finally(function() {
-    btn.textContent = 'Send message →';
-    btn.disabled = false;
-  });
+  var name = document.getElementById('cf-name').value;
+  var email = document.getElementById('cf-email').value;
+  var inquiryType = document.getElementById('inquiry-type-select').value;
+  var message = document.getElementById('cf-message').value;
+  var subject = 'AIAPC Inquiry: ' + (inquiryType || 'General');
+  var body = 'Name: ' + name + '\nEmail: ' + email + '\nInquiry Type: ' + (inquiryType || 'General') + '\n\nMessage:\n' + message;
+  window.location.href = 'mailto:collins.ra@northeastern.edu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  status.style.display = 'block';
+  status.style.background = 'rgba(82,112,85,.12)';
+  status.style.color = 'var(--sage)';
+  status.style.border = '1px solid rgba(82,112,85,.3)';
+  status.textContent = 'Opening your email app… If it didn’t open automatically, email collins.ra@northeastern.edu directly.';
+  form.reset();
 }
 
 // ── HASH ROUTING ON LOAD ──
