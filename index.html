@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://aiapc-site.vercel.app/">
+
+<!-- ── TITLE & META ── -->
+<title>AI is a Piece of Cake — AI Literacy for Professionals</title>
+<meta name="description" content="The weekly newsletter making generative AI approachable for lawyers, physicians, executives, and educators. Free. Honest. No hype.">
+
+<!-- ── OG / SOCIAL SHARING ──
+     Replace aiisapieceofcake.com with your actual domain once purchased.
+     Replace /og-image.png with your actual OG image once created (1200x630px).
+-->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiapc-site.vercel.app">
+<meta property="og:title" content="AI is a Piece of Cake — AI Literacy for Professionals">
+<meta property="og:description" content="The weekly newsletter making generative AI approachable for lawyers, physicians, executives, and educators. Free. Honest. No hype.">
+<meta property="og:image" content="https://aiapc-site.vercel.app/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@aicakeweekly">
+  <meta name="twitter:creator" content="@rn_collins">
+<meta name="twitter:title" content="AI is a Piece of Cake — AI Literacy for Professionals">
+<meta name="twitter:description" content="The weekly newsletter making generative AI approachable for professionals. Free. Honest. No hype.">
+<meta name="twitter:image" content="https://aiapc-site.vercel.app/og-image.png">
+
+<!-- ── THEME COLOR (mobile browser chrome) ── -->
+<meta name="theme-color" content="#251205">
+
+<!-- ── FAVICON (inline SVG — replace with /favicon.ico once you have a logo) ── -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>">
+
+<!-- ── FONTS (subsetted to weights actually used) ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Syne:wght@500;600;700&family=Manrope:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --cream:      #FAF4E1;
+  --cream-mid:  #F0E2BC;
+  --cream-card: #FFFDF5;
+  --cocoa:      #251205;
+  --cocoa-mid:  #5A3D22;
+  --cocoa-mute: #8A6A45;
+  --gold:       #C9971F;
+  --gold-lt:    #E8B84B;
+  --rose:       #B84E68;
+  --sage:       #527055;
+  --border:     #D9C28A;
+  --border-lt:  #EDD9A8;
+  --txt-lt:     #FAF4E1;
+  --ff-d: "Cormorant Garamond", Georgia, serif;
+  --ff-h: "Syne", sans-serif;
+  --ff-b: "Manrope", sans-serif;
+  --ff-m: "DM Mono", monospace;
+  --r:    4px;
+  --rlg:  12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--cocoa); border-bottom: 1px solid rgba(201,151,31,.18);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1.5rem,5vw,4rem); height: 64px;
+}
+.nav-logo { font-family: var(--ff-d); font-size: 1.2rem; font-style: italic; color: var(--gold-lt); cursor: pointer; text-decoration: none; border: none; background: none; }
+.nav-links { display: flex; align-items: center; gap: clamp(.8rem,2.5vw,2rem); list-style: none; }
+.nav-links a { font-family: var(--ff-h); font-size: .77rem; letter-spacing: .08em; font-weight: 500; color: rgba(250,244,225,.58); text-decoration: none; text-transform: uppercase; transition: color .2s; cursor: pointer; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-cta { font-family: var(--ff-h); font-size: .76rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: var(--gold); color: var(--cocoa); padding: .5rem 1.2rem; border-radius: var(--r); cursor: pointer; border: none; transition: background .2s; white-space: nowrap; }
+.nav-cta:hover { background: var(--gold-lt); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold-lt); }
+.mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--cocoa); border-bottom: 1px solid rgba(201,151,31,.12); padding: 1.5rem; flex-direction: column; gap: 1rem; z-index: 99; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-family: var(--ff-h); font-size: .9rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: rgba(250,244,225,.68); text-decoration: none; cursor: pointer; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+
+/* ── PAGES ── */
+.page { display: none; opacity: 0; }
+.page.active { display: block; animation: pageFadeIn .15s ease forwards; }
+@keyframes pageFadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* ── SHARED BUTTONS ── */
+.btn { font-family: var(--ff-h); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-radius: var(--r); cursor: pointer; border: none; text-decoration: none; transition: all .2s; display: inline-block; font-size: .83rem; }
+.btn-gold { background: var(--gold); color: var(--cocoa); padding: .85rem 1.9rem; }
+.btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,151,31,.28); }
+.btn-ghost { background: transparent; color: rgba(250,244,225,.62); padding: .85rem 1.9rem; border: 1px solid rgba(250,244,225,.16); }
+.btn-ghost:hover { border-color: rgba(250,244,225,.42); color: var(--txt-lt); }
+.btn-outline-gold { background: transparent; color: var(--gold); padding: .6rem 1.4rem; border: 1px solid rgba(201,151,31,.38); font-size: .77rem; }
+.btn-outline-gold:hover { background: rgba(201,151,31,.08); }
+
+/* ── SECTION SHELL ── */
+.sec { padding: clamp(4rem,8vh,6rem) clamp(1.5rem,5vw,4rem); }
+.sec-in { max-width: 1200px; margin: 0 auto; }
+.sec-label { font-family: var(--ff-m); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+.sec-label-mute { color: var(--cocoa-mute); }
+.sec-h { font-family: var(--ff-d); font-size: clamp(1.9rem,3.8vw,3.25rem); font-weight: 500; line-height: 1.12; color: var(--cocoa); margin-bottom: 1rem; }
+.sec-h-lt { color: var(--txt-lt); }
+.sec-p { font-size: 1rem; color: var(--cocoa-mid); max-width: 540px; line-height: 1.65; margin-bottom: 2.75rem; font-weight: 300; }
+.sec-p-lt { color: rgba(250,244,225,.62); }
+
+/* ── DARK CLIP SECTION ── */
+.dark-clip { background: var(--cocoa); clip-path: polygon(0 40px,100% 0,100% calc(100% - 40px),0 100%); padding: clamp(6rem,11vh,9rem) clamp(1.5rem,5vw,4rem); }
+
+/* ── HERO ── */
+.hero { background: var(--cocoa); min-height: 100vh; padding-top: 64px; display: flex; align-items: center; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%,rgba(201,151,31,.07) 0%,transparent 60%), radial-gradient(ellipse at 80% 20%,rgba(184,78,104,.05) 0%,transparent 50%); pointer-events: none; }
+.hero-in { max-width: 1200px; margin: 0 auto; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,4rem); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; position: relative; z-index: 2; }
+.hero-h { font-family: var(--ff-d); font-size: clamp(3rem,6vw,5.5rem); line-height: 1.05; color: var(--txt-lt); font-weight: 500; margin-bottom: 1.5rem; }
+.hero-h em { font-style: italic; color: var(--gold-lt); }
+.hero-sub { font-size: clamp(.95rem,1.4vw,1.1rem); color: rgba(250,244,225,.66); line-height: 1.65; margin-bottom: 2rem; font-weight: 300; max-width: 440px; }
+
+/* Stat cards */
+.stat-ring { display: flex; flex-direction: column; gap: 1.25rem; }
+.stat-card { background: rgba(255,255,255,.04); border: 1px solid rgba(201,151,31,.15); border-radius: var(--rlg); padding: 1.25rem 1.5rem; }
+.stat-n { font-family: var(--ff-d); font-size: 2.5rem; font-weight: 600; color: var(--gold-lt); line-height: 1; margin-bottom: .25rem; }
+.stat-l { font-family: var(--ff-m); font-size: .67rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,244,225,.42); }
+
+/* ── SECTION CARDS (4 guaranteed) ── */
+.cards-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+.sec-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 2rem; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+.sec-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(92,61,34,.09); }
+@media (hover: none) { .sec-card:active { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(92,61,34,.08); } }
+.sec-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.sec-card.c-gold::before { background: var(--gold); }
+.sec-card.c-rose::before { background: var(--rose); }
+.sec-card.c-sage::before { background: var(--sage); }
+.sec-card.c-cocoa::before { background: var(--cocoa-mid); }
+.card-ico { font-size: 1.75rem; margin-bottom: 1rem; display: block; }
+.card-lbl { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .45rem; }
+.card-h { font-family: var(--ff-d); font-size: 1.55rem; font-weight: 500; color: var(--cocoa); margin-bottom: .7rem; line-height: 1.2; }
+.card-p { font-size: .88rem; color: var(--cocoa-mid); line-height: 1.6; font-weight: 300; }
+.card-freq { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cocoa-mute); margin-top: 1.2rem; padding-top: .9rem; border-top: 1px solid var(--border-lt); }
+
+/* Rotating section mini cards */
+.rotating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2rem; }
+.rot-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; position: relative; }
+.rot-badge { display: inline-block; font-family: var(--ff-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; padding: .22rem .6rem; border-radius: 100px; background: rgba(90,61,34,.06); color: var(--cocoa-mute); border: 1px solid var(--border-lt); margin-bottom: .75rem; }
+.rot-lbl { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .35rem; }
+.rot-h { font-family: var(--ff-d); font-size: 1.2rem; font-weight: 500; color: var(--cocoa); margin-bottom: .45rem; }
+.rot-p { font-size: .8rem; color: var(--cocoa-mute); line-height: 1.5; font-weight: 300; }
+.rot-freq { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cocoa-mute); margin-top: .75rem; }
+
+/* ── WHO WE ARE (homepage teaser) ── */
+.lane-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.lane-card { background: rgba(255,255,255,.04); border: 1px solid rgba(201,151,31,.14); border-radius: var(--rlg); padding: 2rem; }
+.lane-init { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-d); font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
+.lane-init.rn { background: linear-gradient(135deg,var(--gold),var(--rose)); color: var(--cocoa); }
+.lane-init.vc { background: linear-gradient(135deg,var(--sage),var(--gold)); color: var(--cocoa); }
+.lane-name { font-family: var(--ff-d); font-size: 1.5rem; font-weight: 500; color: var(--txt-lt); margin-bottom: .2rem; }
+.lane-role { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block; }
+.lane-bio { font-size: .87rem; color: rgba(250,244,225,.6); line-height: 1.65; font-weight: 300; }
+
+/* ── BRAND LINKS (RN's work) ── */
+.brand-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.1rem; }
+.brand-link { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; padding: .25rem .65rem; border-radius: 100px; background: rgba(201,151,31,.08); color: var(--gold-lt); border: 1px solid rgba(201,151,31,.16); text-decoration: none; transition: background .2s; }
+.brand-link:hover { background: rgba(201,151,31,.16); }
+
+/* ── LAUNCH BADGE ── */
+.badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(201,151,31,.07); border: 1px solid rgba(201,151,31,.26); border-radius: 100px; padding: .33rem .9rem; font-family: var(--ff-m); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+/* ── BEEHIIV EMBED / SUBSCRIBE ──
+   Replace .embed-placeholder with your actual Beehiiv embed snippet.
+   Steps:
+   1. Log in to Beehiiv → Settings → Forms → Embed
+   2. Copy the embed snippet
+   3. Delete the .embed-placeholder div
+   4. Paste the Beehiiv snippet in its place
+   Publication: aiisapieceofcake.beehiiv.com
+*/
+.embed-sec { background: var(--cream-mid); }
+.embed-box { max-width: 600px; margin: 0 auto; text-align: center; }
+.embed-h { font-family: var(--ff-d); font-size: clamp(1.9rem,3.5vw,3rem); font-weight: 500; color: var(--cocoa); margin-bottom: .75rem; line-height: 1.15; }
+.embed-p { color: var(--cocoa-mid); font-size: .96rem; line-height: 1.65; margin-bottom: 1.75rem; font-weight: 300; }
+.embed-note { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cocoa-mute); }
+
+/* ── NEWSLETTER PAGE ── */
+.page-hero { background: var(--cocoa); padding: calc(64px + 5rem) clamp(1.5rem,5vw,4rem) 6rem; }
+.page-hero-in { max-width: 1200px; margin: 0 auto; }
+.section-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 820px; margin-bottom: 3rem; }
+.sec-list-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; }
+.sec-list-head { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .7rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border-lt); }
+.sec-list-head.guaranteed { color: var(--gold); }
+.sec-list-head.rotating { color: var(--cocoa-mute); }
+.sec-list-item { display: flex; gap: .6rem; align-items: baseline; margin-bottom: .5rem; }
+.sec-list-item:last-child { margin-bottom: 0; }
+.sec-list-ico { font-size: .75rem; flex-shrink: 0; }
+.sec-list-name { font-family: var(--ff-h); font-size: .8rem; font-weight: 600; color: var(--cocoa); }
+.sec-list-desc { font-size: .73rem; color: var(--cocoa-mute); font-weight: 300; }
+.sec-list-freq { font-family: var(--ff-m); font-size: .6rem; color: var(--cocoa-mute); letter-spacing: .06em; }
+.diff-box { background: rgba(201,151,31,.05); border: 1px solid rgba(201,151,31,.18); border-radius: var(--rlg); padding: 1.5rem; max-width: 820px; margin-bottom: 3rem; }
+.tiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 820px; }
+.tier-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; }
+.tier-hd { padding: 1.75rem; border-bottom: 1px solid var(--border-lt); }
+.tier-hd.dark { background: var(--cocoa); }
+.tier-nm { font-family: var(--ff-h); font-size: .76rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .4rem; }
+.tier-nm.lt { color: rgba(250,244,225,.42); }
+.tier-price { font-family: var(--ff-d); font-size: 3rem; font-weight: 500; color: var(--cocoa); line-height: 1; }
+.tier-price.lt { color: var(--txt-lt); }
+.tier-per { font-family: var(--ff-m); font-size: .72rem; color: var(--cocoa-mute); }
+.tier-per.lt { color: rgba(250,244,225,.35); }
+.tier-bd { padding: 1.5rem 1.75rem; }
+.benefit-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.benefit-list li { display: flex; gap: .65rem; align-items: flex-start; font-size: .86rem; color: var(--cocoa-mid); line-height: 1.5; font-weight: 300; }
+.benefit-list li .chk { color: var(--gold); font-size: .78rem; margin-top: .1em; flex-shrink: 0; }
+.cadence-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding: 1.75rem; background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); max-width: 820px; }
+.cad-lbl { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .2rem; }
+.cad-val { font-family: var(--ff-h); font-size: .88rem; font-weight: 600; color: var(--cocoa); }
+.aud-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1.5rem; }
+.aud-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; }
+
+/* ── PRODUCTS PAGE ── */
+.persuasion-intro { background: var(--cocoa); padding: 2.5rem; border-radius: var(--rlg); margin-bottom: 3rem; max-width: 820px; }
+.product-ladder { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.product-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }
+.product-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(92,61,34,.1); }
+.product-hd { padding: 1.75rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border-lt); }
+.product-step { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .4rem; }
+.product-name { font-family: var(--ff-d); font-size: 1.45rem; font-weight: 500; color: var(--cocoa); line-height: 1.2; margin-bottom: .2rem; }
+.product-tag { font-family: var(--ff-d); font-size: .95rem; color: var(--cocoa-mute); font-style: italic; }
+.product-bd { padding: 1.5rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
+.product-price { font-family: var(--ff-m); font-size: 1rem; color: var(--gold); margin-bottom: 1.1rem; font-weight: 500; }
+.module-list { list-style: none; flex: 1; display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.5rem; }
+.module-list li { font-size: .79rem; color: var(--cocoa-mid); padding-left: .9rem; position: relative; font-weight: 300; line-height: 1.5; }
+.module-list li::before { content: "—"; position: absolute; left: 0; color: var(--cocoa-mute); font-size: .67rem; top: .1em; }
+.product-footer { margin-top: auto; display: flex; flex-direction: column; gap: .5rem; }
+.soon-badge { display: inline-block; font-family: var(--ff-m); font-size: .61rem; letter-spacing: .1em; text-transform: uppercase; padding: .26rem .68rem; border-radius: 100px; background: rgba(90,61,34,.05); color: var(--cocoa-mute); border: 1px solid var(--border-lt); }
+.notify-link { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); text-decoration: none; cursor: pointer; background: none; border: none; transition: color .2s; }
+.notify-link:hover { color: var(--gold-lt); }
+.mini-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1.5rem; }
+.mini-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; }
+.mini-ico { font-size: 1.5rem; margin-bottom: .65rem; }
+.mini-name { font-family: var(--ff-h); font-size: .83rem; font-weight: 600; color: var(--cocoa); margin-bottom: .22rem; }
+.mini-p { font-size: .77rem; color: var(--cocoa-mute); line-height: 1.5; font-weight: 300; }
+.mini-price { font-family: var(--ff-m); font-size: .7rem; color: var(--gold); margin-top: .65rem; }
+.ed-table { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; max-width: 680px; }
+.ed-hd { padding: 1.75rem; border-bottom: 1px solid var(--border-lt); }
+.ed-tiers { display: grid; grid-template-columns: repeat(4,1fr); }
+.ed-tier { padding: 1.5rem 1rem; text-align: center; border-right: 1px solid var(--border-lt); }
+.ed-tier:last-child { border-right: none; }
+.ed-lbl { font-family: var(--ff-m); font-size: .61rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .4rem; }
+.ed-price { font-family: var(--ff-d); font-size: 2rem; font-weight: 500; color: var(--cocoa); }
+
+/* Vanda corporate products */
+.vanda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 760px; }
+.vanda-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; display: flex; flex-direction: column; }
+.vanda-step { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .45rem; }
+.vanda-name { font-family: var(--ff-d); font-size: 1.25rem; font-weight: 500; color: var(--cocoa); margin-bottom: .45rem; }
+.vanda-p { font-size: .81rem; color: var(--cocoa-mute); line-height: 1.55; font-weight: 300; flex: 1; margin-bottom: .75rem; }
+.vanda-price { font-family: var(--ff-m); font-size: .7rem; color: var(--gold); margin-bottom: .75rem; }
+.vanda-contact { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .06em; color: var(--gold); text-decoration: none; }
+.vanda-contact:hover { color: var(--gold-lt); }
+#vanda-inquiry-form select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9971F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem !important; }
+
+/* ── WHO WE ARE PAGE ── */
+.about-hero { background: var(--cocoa); padding: calc(64px + 5rem) clamp(1.5rem,5vw,4rem) 6rem; }
+.mission-q { font-family: var(--ff-d); font-size: clamp(1.75rem,3.5vw,2.75rem); font-weight: 500; font-style: italic; color: var(--txt-lt); line-height: 1.35; border-left: 3px solid var(--gold); padding-left: 2rem; max-width: 680px; margin-bottom: 1.5rem; }
+.mission-p { font-size: .96rem; color: rgba(250,244,225,.6); line-height: 1.7; font-weight: 300; max-width: 580px; margin-bottom: 1rem; }
+.lane-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-lt); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; max-width: 860px; }
+.lane-half { background: var(--cream-card); padding: 2rem; }
+.lane-half-lbl { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .6rem; }
+.lane-half-name { font-family: var(--ff-d); font-size: 1.35rem; font-weight: 500; color: var(--cocoa); margin-bottom: 1rem; }
+.lane-items { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.lane-items li { font-size: .84rem; color: var(--cocoa-mid); display: flex; gap: .6rem; font-weight: 300; }
+.lane-items li::before { content: "→"; color: var(--gold); font-size: .74rem; flex-shrink: 0; margin-top: .15em; }
+.bio-init { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-d); font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+.bio-init.rn { background: linear-gradient(135deg,var(--gold),var(--rose)); color: var(--cocoa); }
+.bio-init.vc { background: linear-gradient(135deg,var(--sage),var(--gold)); color: var(--cocoa); }
+.bio-name { font-family: var(--ff-d); font-size: 1.75rem; font-weight: 500; color: var(--cocoa); margin-bottom: .15rem; }
+.bio-role { font-family: var(--ff-m); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; display: block; }
+.bio-p { font-size: .92rem; color: var(--cocoa-mid); line-height: 1.7; font-weight: 300; margin-bottom: .85rem; }
+.cred-list { list-style: none; display: flex; flex-direction: column; gap: .28rem; margin-top: .9rem; }
+.cred-list li { font-size: .79rem; color: var(--cocoa-mute); padding-left: .9rem; position: relative; font-weight: 300; }
+.cred-list li::before { content: "·"; position: absolute; left: 0; color: var(--gold); }
+
+/* ── FOOTER ── */
+.footer { background: var(--cocoa); padding: 3rem clamp(1.5rem,5vw,4rem) 2rem; border-top: 1px solid rgba(201,151,31,.1); }
+.footer-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+.footer-logo { font-family: var(--ff-d); font-size: 1.2rem; font-style: italic; color: var(--gold-lt); margin-bottom: .6rem; }
+.footer-tag { font-size: .82rem; color: rgba(250,244,225,.38); line-height: 1.6; font-weight: 300; max-width: 260px; }
+.footer-col-h { font-family: var(--ff-h); font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,244,225,.32); margin-bottom: 1rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+.footer-links a { font-size: .82rem; color: rgba(250,244,225,.48); text-decoration: none; cursor: pointer; transition: color .2s; font-weight: 300; }
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-bot { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.05); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.footer-legal { font-family: var(--ff-m); font-size: .61rem; letter-spacing: .06em; color: rgba(250,244,225,.24); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  .hero-in { grid-template-columns: 1fr; gap: 2.5rem; }
+  .stat-ring { flex-direction: row; flex-wrap: wrap; }
+  .stat-card { flex: 1; min-width: 130px; }
+  .cards-grid, .lane-grid, .product-ladder, .tiers-grid { grid-template-columns: 1fr; }
+  .rotating-grid, .mini-grid { grid-template-columns: 1fr 1fr; }
+  .aud-grid { grid-template-columns: 1fr 1fr; }
+  .footer-in { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .roadmap-pair { grid-template-columns: 1fr !important; }
+  .section-list-grid { grid-template-columns: 1fr; }
+  .lane-split { grid-template-columns: 1fr; }
+  .vanda-grid { grid-template-columns: 1fr; }
+  .nav-links, .nav-cta { display: none; }
+  #contact-form > div:first-child { grid-template-columns: 1fr; }
+  .hamburger { display: flex; }
+  .dark-clip { clip-path: none; }
+}
+@media (max-width:600px) {
+  .rotating-grid, .mini-grid, .aud-grid, .ed-tiers { grid-template-columns: 1fr; }
+  .ed-tier { border-right: none; border-bottom: 1px solid var(--border-lt); }
+  .lane-half { border-right: none; border-bottom: 1px solid var(--border-lt); }
+  #vanda-inquiry-form > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  .contact-direct-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width:400px) {
+  .contact-direct-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav class="nav">
+  <button class="nav-logo" onclick="showPage('home')">AI is a Piece of Cake <span style="font-style:normal;font-family:var(--ff-h);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,244,225,.38);margin-left:.4rem;vertical-align:middle">AIAPC</span></button>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('newsletter')" id="nav-newsletter">Newsletter</a></li>
+    <li><a onclick="showPage('products')" id="nav-products">Products</a></li>
+    <li><a onclick="showPage('who')" id="nav-who">Who We Are</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="goSubscribe()">Get Notified →</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a onclick="showPage('home');toggleMobile()">Home</a>
+  <a onclick="showPage('newsletter');toggleMobile()">Newsletter</a>
+  <a onclick="showPage('products');toggleMobile()">Products</a>
+  <a onclick="showPage('who');toggleMobile()">Who We Are</a>
+  <a onclick="showPage('contact');toggleMobile()">Contact</a>
+  <a onclick="goSubscribe();toggleMobile()">Get Notified →</a>
+</div>
+
+
+<main id="site-content">
+<!-- ═══════════════════════════════════════════ -->
+<!-- HOME PAGE                                   -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-in">
+      <div>
+        <h1 class="hero-h">Making AI<br><em>deliciously</em><br>approachable</h1>
+        <p class="hero-sub">The weekly newsletter for lawyers, physicians, executives, and educators who were never invited to the Silicon Valley conversation. Free. Honest. No hype.</p>
+
+        <!--
+          ══════════════════════════════════════════════════
+          BEEHIIV EMBED — HERO SUBSCRIBE FORM
+          Replace this block (the .hero-subscribe-state div) with your
+          Beehiiv embed code when the publication goes live.
+          Beehiiv → Settings → Forms → Embed
+          Publication: aiisapieceofcake.beehiiv.com
+          ══════════════════════════════════════════════════
+        -->
+        <div class="hero-subscribe-state">
+          <div class="badge" style="margin-bottom:1rem"><span class="badge-dot"></span>Launching November 2026</div>
+          <p style="font-family:var(--ff-m);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,244,225,.45);margin-bottom:1.25rem">Get in touch early to be first in line.</p>
+          <a class="btn btn-ghost" onclick="showPage('contact')">Get in Touch Early →</a>
+        </div>
+        <!-- END BEEHIIV HERO EMBED -->
+      </div>
+      <div>
+        <div class="stat-ring">
+          <div class="stat-card"><div class="stat-n">Free</div><div class="stat-l">Always — every section, every issue</div></div>
+          <div class="stat-card"><div class="stat-n">4</div><div class="stat-l">4 sections per issue · Every Thursday 9am HST</div></div>
+          <div class="stat-card"><div class="stat-n">0</div><div class="stat-l">Hype · Jargon · Paywalled articles</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="sec-in">
+      <div class="sec-label">Every Issue</div>
+      <h2 class="sec-h">Four sections.<br>Every Thursday. No exceptions.</h2>
+      <div class="cards-grid">
+        <div class="sec-card c-gold">
+          <span class="card-ico">🍰</span>
+          <div class="card-lbl">The Slice</div>
+          <h3 class="card-h">One AI concept, explained simply</h3>
+          <p class="card-p">One concept from scratch — no assumed prior knowledge, one analogy, one concrete thing you can try today. Written specifically for professionals who need precision, not simplification.</p>
+          <div class="card-freq">350–400 words · Every issue</div>
+        </div>
+        <div class="sec-card c-sage">
+          <span class="card-ico">🔧</span>
+          <div class="card-lbl">Tool Tasting</div>
+          <h3 class="card-h">One AI tool, honestly assessed</h3>
+          <p class="card-p">What it does, what users actually say, one thing worth knowing this week. Not a tutorial, not a scored comparison. A practitioner-facing verdict: is this worth your attention right now?</p>
+          <div class="card-freq">150–250 words · Every issue</div>
+        </div>
+        <div class="sec-card c-rose">
+          <span class="card-ico">📋</span>
+          <div class="card-lbl">The Case</div>
+          <h3 class="card-h">One AI failure mechanism. What it means for your work.</h3>
+          <p class="card-p">A documented AI failure in professional practice — the mechanism, not the callout. What went wrong, why it went wrong, and how to recognize the same pattern in your own workflow before it becomes your problem.</p>
+          <div class="card-freq">150–200 words · Every issue</div>
+        </div>
+        <div class="sec-card c-cocoa">
+          <span class="card-ico">📡</span>
+          <div class="card-lbl">Weekly Dispatch</div>
+          <h3 class="card-h">3–5 AI developments.<br>Filtered for professionals.</h3>
+          <p class="card-p">3–5 AI developments curated for professionals. Each item comes with a brief takeaway on why it matters to your work — so you don't have to read 15 other newsletters to stay current.</p>
+          <div class="card-freq">250–350 words · Fresh every Thursday</div>
+        </div>
+      </div>
+
+      <!-- ROTATING SECTIONS -->
+      <div style="margin-top:2.5rem">
+        <div class="sec-label sec-label-mute" style="margin-bottom:.5rem">Also in the mix</div>
+        <p style="font-size:.88rem;color:var(--cocoa-mute);margin-bottom:1.25rem;font-weight:300">Three additional sections that rotate in — starting when we launch.</p>
+        <div class="rotating-grid">
+          <div class="rot-card">
+            <span class="rot-badge">Every other issue</span>
+            <div class="rot-lbl">The Ask</div>
+            <div class="rot-h">Your questions, answered publicly</div>
+            <p class="rot-p">"Can I use ChatGPT to draft discovery requests under Rule 26?" Short, honest professional answers — including "I don't know, but here's how you'd find out."</p>
+            <div class="rot-freq">Biweekly · Subscriber Q&A</div>
+          </div>
+          <div class="rot-card">
+            <span class="rot-badge">Monthly</span>
+            <div class="rot-lbl">The Line</div>
+            <div class="rot-h">A genuine AI ethics edge case. Unresolved.</div>
+            <p class="rot-p">"If AI catches a diagnostic error your clinical judgment missed and you don't act on it, are you liable?" Competing frameworks. Current legal posture. What to do today.</p>
+            <div class="rot-freq">Monthly · Designed to start conversations</div>
+          </div>
+          <div class="rot-card">
+            <span class="rot-badge">Quarterly</span>
+            <div class="rot-lbl">The Build</div>
+            <div class="rot-h">Behind a real AI system I built</div>
+            <p class="rot-p">One real build — a monitoring system, a regulatory intelligence layer, an AI workflow. The decision, the failure point, the lesson. Proof, not theory.</p>
+            <div class="rot-freq">Quarterly · From my practice</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE ARE TEASER -->
+  <section class="dark-clip">
+    <div class="sec-in">
+      <div class="sec-label" style="color:rgba(201,151,31,.65)">The People</div>
+      <h2 class="sec-h sec-h-lt">Co-created by two people<br>who actually use this stuff.</h2>
+      <p class="sec-p sec-p-lt" style="margin-bottom:2rem">A neuroscientist in law school and an institutional program director. Neither of us came from Silicon Valley. That's the point.</p>
+      <div class="lane-grid">
+        <div class="lane-card">
+          <div class="lane-init rn">RN</div>
+          <div class="lane-name">RN Collins</div>
+          <span class="lane-role">Legal · Scientific · Strategic — Newsletter Author</span>
+          <p class="lane-bio">Neuroscientist, JD Candidate at Northeastern Law, AI strategist, and fractional law clerk. She writes the newsletter. All four guaranteed sections, every issue, in her voice.</p>
+          <div class="brand-links">
+            <a class="brand-link" href="https://rn-portfolio-khaki.vercel.app" target="_blank">Portfolio ↗</a>
+            <a class="brand-link" href="https://rncollins.com" target="_blank">rncollins.com</a>
+            <a class="brand-link" href="https://rncollins.com/aloha-ai-consulting" target="_blank">Aloha AI</a>
+            <a class="brand-link" href="https://rncollins.com/clerking" target="_blank">Clerking</a>
+            <a class="brand-link" href="https://rncollins.com/set-for" target="_blank">Set for Life</a>
+            <a class="brand-link" href="https://rncollins.com/nsag" target="_blank">NSAG</a>
+          </div>
+        </div>
+        <div class="lane-card">
+          <div class="lane-init vc">VC</div>
+          <div class="lane-name">Vanda Collins</div>
+          <span class="lane-role">Institutional · Operational · Educator</span>
+          <p class="lane-bio">MBA, MA in I/O Psychology, Executive Program Director. She brings the institutional and corporate training side — workshops, district curriculum licensing, and 1:1 AI coaching for organizations.</p>
+          <!--
+            VANDA LINK — awaiting URL from RN.
+            Replace href="#" with Vanda's professional site, LinkedIn, or contact page.
+            Options: LinkedIn URL · personal site · email link
+          -->
+          <div class="brand-links" style="opacity:.45;font-family:var(--ff-m);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,244,225,.55);margin-top:1.1rem">Link coming soon</div>
+        </div>
+      </div>
+      <div style="margin-top:2rem">
+        <button class="btn btn-outline-gold" onclick="showPage('who')">Full bios →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE / WAITLIST -->
+  <section class="sec embed-sec" id="home-subscribe">
+    <div class="embed-box">
+      <div class="badge"><span class="badge-dot"></span>Launching November 2026</div>
+      <h2 class="embed-h">Be first when<br>the oven opens.</h2>
+      <p class="embed-p">The newsletter is free. Every section, every issue, always. Get in touch early to be first to know when we launch.</p>
+
+      <!--
+        BEEHIIV EMBED — HOME PAGE SUBSCRIBE FORM
+        Replace the static block below with your Beehiiv embed snippet
+        when the publication goes live at aiisapieceofcake.beehiiv.com
+        Beehiiv → Settings → Forms → Embed
+      -->
+      <!-- BEEHIIV EMBED: paste your embed code here at launch -->
+      <div style="text-align:center;padding:2rem 1rem">
+        <p style="font-size:.88rem;color:var(--cocoa-mute);font-weight:300;line-height:1.65">Subscription opens when the first issue is ready. <a onclick="showPage('contact')" style="color:var(--gold);cursor:pointer;text-decoration:none">Get in touch early →</a></p>
+      </div>
+      <!-- END BEEHIIV EMBED -->
+    </div>
+  </section>
+
+</div>
+<!-- END HOME -->
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- NEWSLETTER PAGE                             -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="page-newsletter" class="page">
+
+  <section class="page-hero">
+    <div class="page-hero-in">
+      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">The Newsletter</div>
+      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4.5rem)">Free, every Thursday.<br><em>No exceptions.</em></h1>
+      <p class="hero-sub" style="max-width:500px">The newsletter is always free. Every section. Paid doesn't unlock articles — it unlocks the archive and the tools.</p>
+      <button class="btn btn-gold" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'})">Get Notified at Launch →</button>
+    </div>
+  </section>
+
+  <!-- SECTION BREAKDOWN -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="sec-in">
+      <div class="sec-label">What's Inside</div>
+      <h2 class="sec-h">Seven sections.<br>Two exist nowhere else.</h2>
+      <p style="font-size:.82rem;color:var(--cocoa-mute);font-weight:300;max-width:640px;margin-bottom:1rem">The Case and The Line. The Case applies M&amp;M conference failure analysis to AI. The Line presents genuine ethics edge cases without resolving them. No other AI newsletter does either.</p>
+      <p class="sec-p" style="max-width:640px">Four guaranteed every issue. Three more that rotate in monthly or biweekly.</p>
+
+      <div class="section-list-grid">
+        <div class="sec-list-card">
+          <div class="sec-list-head guaranteed">Every issue · Guaranteed</div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">🍰</span>
+            <div><div class="sec-list-name">The Slice</div><div class="sec-list-desc">One AI concept, explained simply</div><div class="sec-list-freq">350–400 words</div></div>
+          </div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">🔧</span>
+            <div><div class="sec-list-name">Tool Tasting</div><div class="sec-list-desc">One AI tool · Practitioner verdict</div><div class="sec-list-freq">150–250 words</div></div>
+          </div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">📋</span>
+            <div><div class="sec-list-name">The Case</div><div class="sec-list-desc">One AI failure mechanism · What it means</div><div class="sec-list-freq">150–200 words</div></div>
+          </div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">📡</span>
+            <div><div class="sec-list-name">Weekly Dispatch</div><div class="sec-list-desc">3–5 AI items filtered for professionals</div><div class="sec-list-freq">250–350 words</div></div>
+          </div>
+        </div>
+        <div class="sec-list-card">
+          <div class="sec-list-head rotating">Rotating in — starting at launch</div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">❓</span>
+            <div><div class="sec-list-name">The Ask</div><div class="sec-list-desc">One subscriber question, answered publicly</div><div class="sec-list-freq">Biweekly · 100–150 words</div></div>
+          </div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">⚡</span>
+            <div><div class="sec-list-name">The Line</div><div class="sec-list-desc">A genuine AI ethics edge case · Unresolved</div><div class="sec-list-freq">Monthly · 300–400 words</div></div>
+          </div>
+          <div class="sec-list-item">
+            <span class="sec-list-ico">🏗️</span>
+            <div><div class="sec-list-name">The Build</div><div class="sec-list-desc">Behind a real AI system I built</div><div class="sec-list-freq">Quarterly · 400–600 words</div></div>
+          </div>
+          <div style="margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--border-lt)">
+            <div style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.35rem">Conditional</div>
+            <div style="font-size:.75rem;color:var(--cocoa-mute);font-weight:300">Byline when an article publishes at Fat Nugs Magazine, Cannabis Law Report, or the Journal of Biophilic Design</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-box">
+        <div class="sec-label" style="margin-bottom:.5rem">What makes this different</div>
+        <p style="font-size:.9rem;color:var(--cocoa-mid);line-height:1.65;font-weight:300">The Case is written in the M&amp;M conference tradition — the morbidity and mortality review model medicine uses to analyze failures without assigning blame. Not a callout. A mechanism. The Line presents genuine AI ethics edge cases without resolving them, the way a law school hypothetical does. The Ask answers specific professional questions publicly — the kind professionals are already asking in private. These sections are designed for risk-averse, credential-bearing professionals who learn from precedent and edge cases, not from optimism.</p>
+      </div>
+
+      <!-- TIERS -->
+      <div class="sec-label">Free vs. Paid</div>
+      <h2 class="sec-h" style="font-size:2rem;margin-bottom:.75rem">The newsletter is free. Always.</h2>
+      <p class="sec-p">Paid gives you the archive and the tools — not the content. The content is free for everyone.</p>
+      <div class="tiers-grid">
+        <div class="tier-card">
+          <div class="tier-hd">
+            <div class="tier-nm">Free Tier — The newsletter</div>
+            <div class="tier-price">$0</div>
+            <div class="tier-per">Forever · Every section</div>
+          </div>
+          <div class="tier-bd">
+            <ul class="benefit-list">
+              <li><span class="chk">✦</span>The Slice — every issue</li>
+              <li><span class="chk">✦</span>Tool Tasting — every issue</li>
+              <li><span class="chk">✦</span>The Case — every issue</li>
+              <li><span class="chk">✦</span>Weekly Dispatch — every issue</li>
+              <li><span class="chk">✦</span>Rotating sections (The Ask, The Line, The Build)</li>
+              <li><span class="chk">✦</span>Byline when an article publishes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-hd dark">
+            <div class="tier-nm lt">Paid Tier — The tools &amp; archive</div>
+            <div class="tier-price lt">$9</div>
+            <div class="tier-per lt">/month · or $99/year · ~1 month free annually</div>
+          </div>
+          <div class="tier-bd">
+            <ul class="benefit-list">
+              <li><span class="chk">✦</span>Everything in the free tier, plus:</li>
+              <li><span class="chk">✦</span>Full newsletter archive — every past issue, searchable forever</li>
+              <li><span class="chk">✦</span>Prompt library — professional-grade prompts by use case, updated monthly (legal, medical, education, research)</li>
+              <li><span class="chk">✦</span>Cheat sheet library — quick-reference sheets updated as tools evolve (Claude, ChatGPT, Perplexity, Gemini, legal AI, healthcare AI)</li>
+              <li><span class="chk">✦</span>Swipe files, reference cards, and checklist packs — added monthly as the newsletter grows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cadence-row">
+        <div><div class="cad-lbl">Day & Time</div><div class="cad-val">Thursday · 9am HST</div></div>
+        <div><div class="cad-lbl">Frequency</div><div class="cad-val">Weekly</div></div>
+        <div><div class="cad-lbl">Cost to read</div><div class="cad-val">Free forever</div></div>
+        <div><div class="cad-lbl">Launch</div><div class="cad-val">November 2026</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCE -->
+  <section class="sec" style="background:var(--cream-mid)">
+    <div class="sec-in">
+      <div class="sec-label">The Audience</div>
+      <h2 class="sec-h">Who this is for</h2>
+      <p class="sec-p">Credentialed professionals whose fields are being reshaped by AI — with no clear on-ramp and no one explaining it in their register.</p>
+      <div class="aud-grid">
+        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">⚖️</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Lawyers</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">Partners, counsel, and associates at firms where AI is arriving but nobody is explaining it in a legal register.</p></div>
+        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">🏥</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Physicians</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">Clinicians and health administrators watching AI enter patient care without clinical-grade explainers.</p></div>
+        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">📊</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Executives</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">C-suite and senior leaders who need to speak credibly about AI to boards, clients, and regulators.</p></div>
+        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">🎓</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Educators</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">Teachers, professors, and curriculum designers being asked to have an AI policy before anyone has given them AI literacy.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE ANCHOR -->
+  <section class="sec embed-sec" id="nl-subscribe">
+    <div class="embed-box">
+      <div class="badge"><span class="badge-dot"></span>Launching November 2026</div>
+      <h2 class="embed-h">Get it free,<br>every Thursday.</h2>
+      <p class="embed-p">Be first to know when we launch. Get in touch and we'll send you early access.</p>
+      <!--
+        BEEHIIV EMBED — NEWSLETTER PAGE SUBSCRIBE FORM
+        Replace the block below with your Beehiiv embed snippet at launch.
+        aiisapieceofcake.beehiiv.com → Settings → Forms → Embed
+      -->
+      <!-- BEEHIIV EMBED: paste your embed code here at launch -->
+      <div style="text-align:center;padding:2rem 1rem">
+        <p style="font-family:var(--ff-d);font-size:1.2rem;font-weight:500;color:var(--cocoa-mid);line-height:1.4;margin-bottom:.75rem">Launching November 2026.</p>
+        <p style="font-size:.84rem;color:var(--cocoa-mute);font-weight:300;line-height:1.6;margin-bottom:1.25rem">The subscribe form opens when the newsletter is live.</p>
+        <button class="btn btn-outline-gold" onclick="showPage('contact')">Get in touch early →</button>
+      </div>
+      <!-- END BEEHIIV EMBED -->
+    </div>
+  </section>
+
+</div>
+<!-- END NEWSLETTER -->
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PRODUCTS PAGE                               -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="page-products" class="page">
+
+  <section class="page-hero">
+    <div class="page-hero-in" style="text-align:center;max-width:720px;margin:0 auto">
+      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">Products &amp; Services</div>
+      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4rem)">The learning ladder</h1>
+      <p class="hero-sub" style="text-align:center;margin:0 auto 2rem;max-width:460px"><a onclick="showPage('newsletter')" style="color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px">The newsletter</a> builds the mental model. The products let you go further — courses, guides, and teaching editions built for professional contexts.</p>
+      <div class="badge"><span class="badge-dot"></span>All products launching with the newsletter — November 2026</div>
+    </div>
+  </section>
+
+  <!-- THREE COURSES -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="sec-in">
+      <div class="sec-label">The Course Ladder</div>
+      <h2 class="sec-h">Three courses.<br>One layer at a time.</h2>
+
+      <div class="persuasion-intro">
+        <p style="font-family:var(--ff-d);font-size:1.25rem;font-weight:500;color:var(--txt-lt);line-height:1.4;margin-bottom:.75rem">Most AI courses teach tools. This ladder teaches the mental model first.</p>
+        <p style="font-size:.88rem;color:rgba(250,244,225,.6);line-height:1.65;font-weight:300">Course 1 explains what AI actually is — before you touch any tool. Without that foundation, every tool feels mysterious and every output feels random. Course 2 teaches you to get dramatically better results from whatever tools you're already using. Course 3 brings it into your specific professional context. The ladder works because each course earns the next.</p>
+        <p style="font-size:.82rem;color:rgba(250,244,225,.42);line-height:1.65;font-weight:300;margin-top:.75rem">Already reading <a onclick="showPage('newsletter')" style="color:rgba(250,244,225,.7);cursor:pointer;text-decoration:underline;text-underline-offset:2px">the newsletter</a>? These products go deeper.</p>
+      </div>
+
+      <div class="product-ladder">
+        <div class="product-card" style="border-top:3px solid var(--gold)">
+          <div class="product-hd">
+            <div class="product-step">Course 1 · The Foundation</div>
+            <div class="product-name">What Is AI, Actually?</div>
+            <div class="product-tag">The mental model before the tools</div>
+          </div>
+          <div class="product-bd">
+            <div class="product-price">$57</div>
+            <ul class="module-list">
+              <li>What LLMs are and are not — the honest explanation</li>
+              <li>Why AI "hallucinates" and what that means for your work</li>
+              <li>What training data is and why it matters for you</li>
+              <li>How AI "thinks" — token prediction, explained simply</li>
+              <li>Assistants vs. agents vs. tools — the real difference</li>
+              <li>What AI is genuinely good at vs. where it fails</li>
+            </ul>
+            <div class="product-footer">
+              <span class="soon-badge">Coming Nov 2026</span>
+              <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Notify me when this launches →</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" style="border-top:3px solid var(--rose)">
+          <div class="product-hd">
+            <div class="product-step">Course 2 · The Skill</div>
+            <div class="product-name">Prompting That Actually Works</div>
+            <div class="product-tag">Tool-agnostic · Future-proof</div>
+          </div>
+          <div class="product-bd">
+            <div class="product-price">$87</div>
+            <ul class="module-list">
+              <li>The anatomy of a good prompt</li>
+              <li>Role prompting — giving AI context about who you are and what you need</li>
+              <li>Chain-of-thought — getting AI to show its reasoning</li>
+              <li>Few-shot prompting — teaching by example</li>
+              <li>The iteration loop — refining when the first result misses</li>
+              <li>Prompting for legal, education, research, and writing</li>
+              <li>The 10 most common mistakes and how to fix them</li>
+            </ul>
+            <div class="product-footer">
+              <span class="soon-badge">After Course 1 launches</span>
+              <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Notify me →</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" style="border-top:3px solid var(--sage)">
+          <div class="product-hd">
+            <div class="product-step">Course 3 · The Application</div>
+            <div class="product-name">AI for Your Actual Job</div>
+            <div class="product-tag">Modular by profession — pick your track</div>
+          </div>
+          <div class="product-bd">
+            <div class="product-price">$117</div>
+            <ul class="module-list">
+              <li>AI for Legal Professionals — research, memos, contract review</li>
+              <li>AI for Educators — lesson planning, grading, curriculum</li>
+              <li>AI for Healthcare Professionals — documentation, patient comms</li>
+              <li>AI for Researchers — literature review, citations, grant writing</li>
+              <li>AI for Content Creators — drafting, editing, repurposing</li>
+              <li>AI for Operations &amp; Administration — process and comms</li>
+            </ul>
+            <div class="product-footer">
+              <span class="soon-badge">After Course 2 launches</span>
+              <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Notify me →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOL MINI-GUIDES -->
+  <section class="sec" style="background:var(--cream-mid)">
+    <div class="sec-in">
+      <div class="sec-label">Digital Guides</div>
+      <h2 class="sec-h">Tool Mini-Guides</h2>
+      <p class="sec-p" style="margin-bottom:0">Short, specific, and priced low so updates are never owed. Each guide extends a Tool Tasting issue into step-by-step professional guidance.</p>
+      <div class="mini-grid">
+        <div class="mini-card"><div class="mini-ico">🤖</div><div class="mini-name">Getting the Most Out of Claude</div><p class="mini-p">Written by someone who uses Claude daily in regulated professional contexts. What Claude does better than other AI tools for professional work, 3 prompt structures that consistently outperform generic approaches, and 10 ready-to-use prompts for legal research, educational planning, and client communication.</p><div class="mini-price">$12 · PDF</div></div>
+        <div class="mini-card"><div class="mini-ico">⚖️</div><div class="mini-name">ChatGPT for Lawyers</div><p class="mini-p">6 legal tasks where ChatGPT earns its place, 4 where it creates liability risk, and what ABA Formal Opinion 512 actually requires under Rules 1.1 and 5.3. Prompt templates for case prep, memo drafting, and contract review — each marked where attorney review is legally required before use.</p><div class="mini-price">$22 · PDF</div></div>
+        <div class="mini-card"><div class="mini-ico">🏫</div><div class="mini-name">AI for Educators: Quick Start</div><p class="mini-p">Lesson planning prompts that produce usable drafts, rubric generation frameworks, differentiation approaches for mixed-ability classrooms, parent communication templates, and 10 common educator AI mistakes — starting with the citation problem and why it matters more for students than for professionals.</p><div class="mini-price">$12 · PDF</div></div>
+        <div class="mini-card"><div class="mini-ico">🔍</div><div class="mini-name">Perplexity for Research</div><p class="mini-p">Perplexity's sourced-search architecture makes it more trustworthy than ChatGPT for professional research — when you know how to use it. How to structure queries for literature review, fact-check against primary sources, and map regulatory landscapes in legal and healthcare contexts. Includes what Perplexity gets wrong and when to switch tools.</p><div class="mini-price">$12 · PDF</div></div>
+        <div class="mini-card"><div class="mini-ico">🏛️</div><div class="mini-name">Harvey for Legal Teams</div><p class="mini-p">What Harvey actually does vs. what firms expect, implementation checklist, what to test before rollout. For legal ops and managing partners.</p><div class="mini-price">$22 · PDF</div></div>
+        <div class="mini-card"><div class="mini-ico">🏥</div><div class="mini-name">Gemini for Healthcare</div><p class="mini-p">Gemini's specific advantages for healthcare professionals and where its health-context training helps vs. where it doesn't. What to know before using any AI with patient-adjacent data — HIPAA considerations, data retention risks, and what BAAs actually cover. Prompt frameworks for medical documentation and patient communication, written with clinical research experience in the background.</p><div class="mini-price">$12 · PDF</div></div>
+      </div>
+      <p style="font-family:var(--ff-m);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cocoa-mute);margin-top:1.5rem">All guides launching November 2026 ·
+        <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Get notified at launch →</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- ROADMAP: 5 NEW PRODUCTS -->
+  <section class="sec" style="background:var(--cocoa);color:var(--cream)">
+    <div class="sec-in">
+      <div class="sec-label" style="color:var(--gold)">On the Roadmap</div>
+      <h2 class="sec-h" style="color:var(--cream)">Five more.<br>Already scoped.</h2>
+      <p class="sec-p" style="color:rgba(250,244,225,.7);margin-bottom:2.5rem">Built into the production calendar around the weekly issue. Free pieces ship into the newsletter. Paid pieces ship to Gumroad and the bundle.</p>
+
+      <div class="product-ladder">
+
+        <div class="product-card" style="border-top:3px solid var(--gold);background:rgba(250,244,225,.04);border-color:rgba(250,244,225,.08)">
+          <div class="product-hd">
+            <div class="product-step" style="color:var(--gold-lt)">Annual flagship</div>
+            <div class="product-name" style="color:var(--cream)">The Address: State of AI for Professionals</div>
+            <div class="product-tag" style="color:rgba(250,244,225,.55)">First edition: Thursday, January 7, 2027</div>
+          </div>
+          <div class="product-bd">
+            <div class="product-price" style="color:var(--gold-lt)">$47</div>
+            <ul class="module-list" style="color:rgba(250,244,225,.78)">
+              <li>30 to 40 pages, profession-specific cuts for legal, medical, education, and executive</li>
+              <li>Honest accounting of last year's predictions against what actually happened</li>
+              <li>Ten predictions for the coming year, with the reasoning shown</li>
+              <li>What changed in pricing, capability, and compliance over the prior twelve months</li>
+              <li>Free Slice version ships in the regular Thursday issue; full report on Gumroad</li>
+            </ul>
+            <div class="product-footer">
+              <span class="soon-badge">January 2027</span>
+              <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Notify me &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" style="border-top:3px solid var(--sage);background:rgba(250,244,225,.04);border-color:rgba(250,244,225,.08)">
+          <div class="product-hd">
+            <div class="product-step" style="color:var(--gold-lt)">Free diagnostic</div>
+            <div class="product-name" style="color:var(--cream)">AI Readiness Scorecard</div>
+            <div class="product-tag" style="color:rgba(250,244,225,.55)">Twenty questions, profession-tagged, free</div>
+          </div>
+          <div class="product-bd">
+            <div class="product-price" style="color:var(--gold-lt)">Free</div>
+            <ul class="module-list" style="color:rgba(250,244,225,.78)">
+              <li>Twenty diagnostic questions across Use, Verification, and Compliance</li>
+              <li>A personalized one-page report by email</li>
+              <li>Calibrated for legal, medical, education, executive, and other professional contexts</li>
+              <li>Institutional version available as a pre-workshop diagnostic via Vanda</li>
+              <li>Doubles as the front door to the newsletter</li>
+            </ul>
+            <div class="product-footer">
+              <span class="soon-badge">October 2026</span>
+              <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Notify me &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" style="border-top:3px solid var(--rose);background:rgba(250,244,225,.04);border-color:rgba(250,244,225,.08)">
+          <div class="product-hd">
+            <div class="product-step" style="color:var(--gold-lt)">Standalone vault</div>
+            <div class="product-name" style="color:var(--cream)">Skills.md Pack</div>
+            <div class="product-tag" style="color:rgba(250,244,225,.55)">Twelve reusable Claude Skills in markdown</div>
+          </div>
+          <div class="product-bd">
+            <div class="product-price" style="color:var(--gold-lt)">$47</div>
+            <ul class="module-list" style="color:rgba(250,244,225,.78)">
+              <li>Legal Memo, Patient Letter, Lesson Plan, Board Brief, Client Communication</li>
+              <li>Research Synthesis, Discovery Review, Clinical Note, IRB Protocol</li>
+              <li>Course Syllabus, Press Release, Investor Update</li>
+              <li>Drop into a Claude Project; team members get consistent output</li>
+              <li>Each Skill includes the brief, the output spec, and the verification checklist</li>
+            </ul>
+            <div class="product-footer">
+              <span class="soon-badge">November 2026</span>
+              <button class="notify-link" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'});showPage('newsletter')">Notify me &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Annual Bundle (full-width feature card linking to /bundle) -->
+      <div style="background:rgba(201,151,31,.08);border:1px solid rgba(201,151,31,.25);border-radius:var(--rlg);padding:2.25rem;margin-top:2rem">
+        <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Annual bundle &middot; individual</div>
+        <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.5rem">The Annual Bundle</div>
+        <div class="product-tag" style="color:rgba(250,244,225,.55);margin-bottom:1rem">Every paid product AIAPC publishes in your twelve-month window. Paid newsletter, Skills Packs, Decision Cards, Prompt Packs, mini-guides, workbooks, template suites, The Address, AI Policy Implementation Kit.</div>
+        <div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap">
+          <div class="product-price" style="color:var(--gold-lt);font-size:1.6rem">$297 / year</div>
+          <div style="color:rgba(250,244,225,.5);font-size:.85rem;font-style:italic">about $0.81 per day &middot; roughly 71% off &agrave; la carte</div>
+        </div>
+        <p style="font-size:.88rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.6;margin-bottom:1.25rem">Full math, complete product list, and FAQ on the dedicated bundle page. Thirty-day refund. Renewal locked at $237 for year two.</p>
+        <a href="/bundle" style="display:inline-block;padding:.85rem 1.75rem;background:var(--gold);color:var(--cocoa);font-family:var(--ff-h);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s">See the bundle &rarr;</a>
+      </div>
+
+      <!-- Team & Institutional License (expanded three-tier section) -->
+      <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(250,244,225,.12)">
+        <div class="product-step" style="color:var(--gold-lt);margin-bottom:.5rem">Firm &middot; school &middot; hospital</div>
+        <div class="product-name" style="color:var(--cream);margin-bottom:.5rem;font-size:1.5rem">Team &amp; Institutional License</div>
+        <p style="font-size:.95rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.6;margin-bottom:1.75rem;max-width:680px">Same baseline AI literacy across your team. Three tiers, each including everything in the lower tiers plus its named additions. Full standard terms in the License Terms PDF below.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.75rem" class="roadmap-pair">
+
+          <div style="background:rgba(82,112,85,.10);border:1px solid rgba(82,112,85,.30);border-radius:var(--rlg);padding:1.75rem">
+            <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Tier 1 &middot; up to 5 seats</div>
+            <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.15rem">Small Team</div>
+            <div class="product-price" style="color:var(--gold-lt);margin-bottom:.75rem">$500 / year</div>
+            <ul style="font-size:.82rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.55;padding-left:1.1rem;margin-bottom:0">
+              <li style="margin-bottom:.35rem">Annual Bundle access per seat</li>
+              <li style="margin-bottom:.35rem">60-minute group onboarding call</li>
+              <li style="margin-bottom:.35rem">Dedicated institutional support email</li>
+              <li>Internal rollout announcement template</li>
+            </ul>
+          </div>
+
+          <div style="background:rgba(201,151,31,.10);border:1px solid rgba(201,151,31,.30);border-radius:var(--rlg);padding:1.75rem">
+            <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Tier 2 &middot; up to 20 seats</div>
+            <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.15rem">Department</div>
+            <div class="product-price" style="color:var(--gold-lt);margin-bottom:.75rem">$1,500 / year</div>
+            <ul style="font-size:.82rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.55;padding-left:1.1rem;margin-bottom:0">
+              <li style="margin-bottom:.35rem">Everything in Small Team</li>
+              <li style="margin-bottom:.35rem">Quarterly group office hours (4 &times; 45 min)</li>
+              <li style="margin-bottom:.35rem">Up to 3 custom Skills calibrated to your work</li>
+              <li>Consolidated invoicing</li>
+            </ul>
+          </div>
+
+          <div style="background:rgba(184,78,104,.10);border:1px solid rgba(184,78,104,.30);border-radius:var(--rlg);padding:1.75rem">
+            <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Tier 3 &middot; up to 50 seats</div>
+            <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.15rem">Institution</div>
+            <div class="product-price" style="color:var(--gold-lt);margin-bottom:.75rem">$3,000 / year</div>
+            <ul style="font-size:.82rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.55;padding-left:1.1rem;margin-bottom:0">
+              <li style="margin-bottom:.35rem">Everything in Department</li>
+              <li style="margin-bottom:.35rem">90-min named training session (live + recorded)</li>
+              <li style="margin-bottom:.35rem">Annual AI workflow audit letter</li>
+              <li>Expedited response window (1 business day)</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <p style="font-size:.85rem;color:rgba(250,244,225,.55);font-style:italic;margin-bottom:1.25rem">Above 50 seats: enterprise tier, custom-quoted. All tiers run a 12-month term with renewal capped at +5% year over year.</p>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
+          <a href="/AIAPC-Team-License-Terms-v1.pdf" target="_blank" rel="noopener" style="display:inline-block;padding:.85rem 1.75rem;background:var(--gold);color:var(--cocoa);font-family:var(--ff-h);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s">Standard terms (PDF) &rarr;</a>
+          <button class="notify-link" onclick="showPage('contact');setTimeout(function(){var s=document.getElementById('inquiry-type-select');if(s){s.value='institutional';s.scrollIntoView({behavior:'smooth',block:'center'});}},200)" style="color:var(--gold-lt);background:transparent;border:1px solid rgba(201,151,31,.4);padding:.85rem 1.75rem;font-family:var(--ff-h);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;cursor:pointer">Institutional inquiry &rarr;</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATIONAL EDITIONS -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="sec-in">
+      <div class="sec-label">Educational Editions</div>
+      <h2 class="sec-h">Published work,<br>packaged for teaching.</h2>
+      <p class="sec-p">Published articles from active research and journalism in cannabis law, psychedelic medicine, and biophilic design — each paired with a teaching apparatus: discussion questions tied to specific claims, case studies from the legal and scientific record, and framework summaries for seminar or lecture use. Priced by audience type so the same content reaches undergraduate and doctoral programs at the appropriate rate.</p>
+      <div class="ed-table">
+        <div class="ed-hd">
+          <div class="product-step" style="margin-bottom:.4rem">Pricing by audience</div>
+          <div class="product-name" style="margin-bottom:.35rem">Four tiers. Same content.</div>
+          <p style="font-size:.82rem;color:var(--cocoa-mute);font-weight:300;margin-bottom:.75rem">The PDF is the same. The price reflects the institution using it.</p>
+          <p style="font-size:.8rem;color:var(--cocoa-mute);font-weight:300">Instructors: <a onclick="showPage('contact')" style="color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:2px">request a complimentary review copy via the contact form</a> — mention your institution and course in the message. · Site licenses for 20+ students available.</p>
+        </div>
+        <div class="ed-tiers">
+          <div class="ed-tier"><div class="ed-lbl">Undergrad</div><div class="ed-price">$25</div></div>
+          <div class="ed-tier"><div class="ed-lbl">Graduate</div><div class="ed-price">$35</div></div>
+          <div class="ed-tier"><div class="ed-lbl">JD / Law</div><div class="ed-price">$38</div></div>
+          <div class="ed-tier"><div class="ed-lbl">Doctoral</div><div class="ed-price">$45</div></div>
+        </div>
+        <div style="padding:1.25rem 1.75rem;border-top:1px solid var(--border-lt);background:rgba(201,151,31,.03);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <div style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem">Site License</div>
+            <div style="font-size:.82rem;color:var(--cocoa-mid);font-weight:300">20+ students &middot; Same PDF + apparatus &middot; No per-student fee</div>
+          </div>
+          <button class="btn btn-outline-gold" onclick="showPage('contact')">Inquire about site license &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- END PRODUCTS -->
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- WHO WE ARE PAGE                             -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="page-who" class="page">
+  <section class="about-hero">
+    <div class="page-hero-in">
+      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">Who We Are</div>
+      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4.5rem)">Two people.<br><em>Both practitioners.</em></h1>
+      <blockquote class="mission-q">
+        "AI literacy isn't about knowing every tool. It's about having the mental model to evaluate any tool — and the judgment to know when not to use one."
+      </blockquote>
+      <p class="mission-p">We built AIAPC because we couldn't find what we wanted: a newsletter written for credentialed professionals, in their register, without the hype. So we made it ourselves.</p>
+    </div>
+  </section>
+
+  <!-- DIVISION OF LABOR -->
+  <section class="sec" style="background:var(--cream)">
+    <div class="sec-in">
+      <div class="sec-label">How We Work</div>
+      <h2 class="sec-h">Different lanes.<br>One standard.</h2>
+      <p class="sec-p">RN writes the newsletter. Vanda runs the institutional side. The work doesn't overlap because it doesn't need to — each of us is doing exactly what we're built for.</p>
+      <div class="lane-split">
+        <div class="lane-half">
+          <div class="lane-half-lbl">RN Collins — Newsletter &amp; Content</div>
+          <div class="lane-half-name">Legal · Scientific · Strategic</div>
+          <ul class="lane-items">
+            <li>All four guaranteed newsletter sections, every issue</li>
+            <li>Mini-guides, courses, and digital products</li>
+            <li>Legal and scientific research threads</li>
+            <li>AI workflow development and documentation</li>
+            <li>Published journalism in cannabis law, psychedelic medicine, biophilic design</li>
+          </ul>
+        </div>
+        <div class="lane-half">
+          <div class="lane-half-lbl">Vanda Collins — Institutional &amp; Training</div>
+          <div class="lane-half-name">Operational · Educator · Corporate</div>
+          <ul class="lane-items">
+            <li>Workshops and district curriculum licensing</li>
+            <li>1:1 AI coaching for organizations</li>
+            <li>Team and institutional license onboarding</li>
+            <li>Pre-workshop AI Readiness Scorecard administration</li>
+            <li>Corporate training program design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL BIOS -->
+  <section class="sec" style="background:var(--cream-mid)">
+    <div class="sec-in">
+      <div class="sec-label">The People</div>
+      <h2 class="sec-h">Full bios.</h2>
+
+      <!-- RN Collins -->
+      <div style="margin-bottom:3rem;max-width:760px">
+        <div class="bio-init rn">RN</div>
+        <div class="bio-name">RN Collins</div>
+        <span class="bio-role">Legal · Scientific · Strategic — Newsletter Author</span>
+        <p class="bio-p">Neuroscientist, JD Candidate at Northeastern Law, AI strategist, and fractional law clerk. RN writes the newsletter — all four guaranteed sections, every issue, in her voice. She's been using AI in regulated professional contexts since 2022, which means she's run into the failure modes that don't make it into the product demos.</p>
+        <p class="bio-p">Her background is in neuroscience and scientific research, which informs how she thinks about AI: systems that behave probabilistically, not deterministically, require the same rigor you'd apply to reading a study — attention to methodology, skepticism about edge cases, and clarity about what the data can and can't tell you.</p>
+        <p class="bio-p">She's also a journalist. Her published work spans cannabis law, psychedelic medicine policy, and biophilic design — all fields where the gap between what practitioners know and what the public understands is large, consequential, and rarely bridged well. AIAPC is the same project applied to AI.</p>
+        <ul class="cred-list">
+          <li>JD Candidate, Northeastern University School of Law</li>
+          <li>B.S. Neuroscience</li>
+          <li>AI Strategist &amp; Fractional Law Clerk</li>
+          <li>Published: Fat Nugs Magazine, Cannabis Law Report, Journal of Biophilic Design</li>
+          <li>Founder, Aloha AI Consulting</li>
+        </ul>
+        <div class="brand-links" style="margin-top:1.25rem">
+          <a class="brand-link" href="https://rn-portfolio-khaki.vercel.app" target="_blank" rel="noopener">Portfolio &#8599;</a>
+          <a class="brand-link" href="https://rncollins.com" target="_blank" rel="noopener">rncollins.com</a>
+          <a class="brand-link" href="https://rncollins.com/aloha-ai-consulting" target="_blank" rel="noopener">Aloha AI</a>
+          <a class="brand-link" href="https://rncollins.com/clerking" target="_blank" rel="noopener">Clerking</a>
+          <a class="brand-link" href="https://rncollins.com/set-for" target="_blank" rel="noopener">Set for Life</a>
+          <a class="brand-link" href="https://rncollins.com/nsag" target="_blank" rel="noopener">NSAG</a>
+        </div>
+      </div>
+
+      <!-- Vanda Collins -->
+      <div style="max-width:760px">
+        <div class="bio-init vc">VC</div>
+        <div class="bio-name">Vanda Collins</div>
+        <span class="bio-role">Institutional · Operational · Educator</span>
+        <p class="bio-p">MBA, MA in Industrial/Organizational Psychology, Executive Program Director. Vanda runs the institutional side of AIAPC — workshops, district curriculum licensing, team onboarding, and 1:1 AI coaching for organizations navigating AI adoption without a clear playbook.</p>
+        <p class="bio-p">Her background is in organizational behavior and adult learning, which means she approaches AI literacy the way a program director would: with attention to adoption curves, baseline assessment, and the difference between knowing what a tool does and actually changing how a team works. She's the reason the institutional products are structured the way they are.</p>
+        <ul class="cred-list">
+          <li>MBA</li>
+          <li>MA, Industrial/Organizational Psychology</li>
+          <li>Executive Program Director</li>
+          <li>Corporate training and district curriculum licensing</li>
+          <li>1:1 AI coaching for organizations</li>
+        </ul>
+        <div class="brand-links" style="margin-top:1.25rem;opacity:.55">
+          <span style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(90,61,34,.5)">Professional links coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY AIAPC -->
+  <section class="dark-clip">
+    <div class="sec-in">
+      <div class="sec-label" style="color:rgba(201,151,31,.65)">Why This Exists</div>
+      <h2 class="sec-h sec-h-lt">Neither of us came<br>from Silicon Valley.</h2>
+      <p class="sec-p sec-p-lt" style="max-width:620px">We came from the fields AI is disrupting: law, medicine, education, research. We know what it feels like to be handed a tool and told to figure it out. AIAPC is the resource we wanted and couldn't find — written by practitioners, for practitioners, without the missionary tone.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
+        <button class="btn btn-gold" onclick="showPage('newsletter')">Read the newsletter &rarr;</button>
+        <button class="btn btn-ghost" onclick="showPage('contact')">Get in touch &rarr;</button>
+      </div>
+    </div>
+  </section>
+</div><!-- END WHO WE ARE -->
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONTACT PAGE                                -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <section class="page-hero">
+    <div class="page-hero-in">
+      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">Contact</div>
+      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4rem)">Get in touch.<br><em>We read everything.</em></h1>
+      <p class="hero-sub" style="max-width:480px">Early access, institutional inquiries, press, educator review copies, or just a question — use the form or reach out directly.</p>
+    </div>
+  </section>
+
+  <section class="sec" style="background:var(--cream)">
+    <div class="sec-in">
+
+      <!-- DIRECT CONTACT METHODS -->
+      <div class="sec-label" style="margin-bottom:1rem">Direct</div>
+      <div class="contact-direct-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:820px;margin-bottom:3rem">
+        <div class="aud-card">
+          <div style="font-size:1.4rem;margin-bottom:.65rem">✉️</div>
+          <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Email</div>
+          <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">For anything that doesn't fit a form.</p>
+          <a href="mailto:hello@aiisapieceofcake.com" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">hello@aiisapieceofcake.com</a>
+        </div>
+        <div class="aud-card">
+          <div style="font-size:1.4rem;margin-bottom:.65rem">🐦</div>
+          <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Twitter / X</div>
+          <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">Newsletter updates and AI news filtered for professionals.</p>
+          <a href="https://twitter.com/aicakeweekly" target="_blank" rel="noopener" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">@aicakeweekly</a>
+        </div>
+        <div class="aud-card">
+          <div style="font-size:1.4rem;margin-bottom:.65rem">👤</div>
+          <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">RN on X</div>
+          <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">RN's personal feed — AI, law, neuroscience, research.</p>
+          <a href="https://twitter.com/rn_collins" target="_blank" rel="noopener" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">@rn_collins</a>
+        </div>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="sec-label" style="margin-bottom:1rem">Send a Message</div>
+      <form id="contact-form" action="https://formspree.io/f/placeholder" method="POST" style="max-width:680px" onsubmit="handleContactSubmit(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+          <div>
+            <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" required placeholder="Your name" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+          <div>
+            <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" required placeholder="you@example.com" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+        </div>
+        <div style="margin-bottom:1rem">
+          <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="inquiry-type-select">Inquiry type</label>
+          <select id="inquiry-type-select" name="inquiry_type" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;appearance:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+            <option value="">Select one…</option>
+            <option value="early-access">Early access / notify me at launch</option>
+            <option value="institutional">Institutional or team inquiry</option>
+            <option value="educator">Educator review copy request</option>
+            <option value="press">Press or media</option>
+            <option value="general">General question</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1.5rem">
+          <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required rows="5" placeholder="Your message…" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;resize:vertical;transition:border-color .2s;min-height:120px" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+        </div>
+        <div id="cf-status" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:var(--r);font-family:var(--ff-m);font-size:.72rem;letter-spacing:.06em"></div>
+        <button type="submit" class="btn btn-gold">Send message &rarr;</button>
+        <p style="font-family:var(--ff-m);font-size:.61rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cocoa-mute);margin-top:1rem">We respond within 1–2 business days.</p>
+      </form>
+    </div>
+  </section>
+</div><!-- END CONTACT -->
+
+</main><!-- END SITE-CONTENT -->
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <div class="footer-in">
+    <div>
+      <div class="footer-logo">AI is a Piece of Cake</div>
+      <p class="footer-tag">The weekly newsletter making AI approachable for lawyers, physicians, executives, and educators. Free. Honest. No hype.</p>
+    </div>
+    <div>
+      <div class="footer-col-h">Navigate</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('newsletter')">Newsletter</a></li>
+        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a onclick="showPage('who')">Who We Are</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-h">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://twitter.com/aicakeweekly" target="_blank" rel="noopener">@aicakeweekly</a></li>
+        <li><a href="https://twitter.com/rn_collins" target="_blank" rel="noopener">@rn_collins (RN)</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-h">Legal</div>
+      <ul class="footer-links">
+        <li><a href="/AIAPC-Team-License-Terms-v1.pdf" target="_blank" rel="noopener">License Terms</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span class="footer-legal">&copy; 2024&ndash;2026 RN Collins &amp; Vanda Collins. AI is a Piece of Cake. All rights reserved.</span>
+    <span class="footer-legal">Launching November 2026 &middot; <a onclick="showPage('contact')" style="color:inherit;cursor:pointer">Get early access &rarr;</a></span>
+  </div>
+</footer>
+
+<script>
+// ── PAGE ROUTER ──
+var pages = ['home','newsletter','products','who','contact'];
+
+function showPage(id) {
+  pages.forEach(function(p) {
+    var el = document.getElementById('page-' + p);
+    var nav = document.getElementById('nav-' + p);
+    if (el) { el.classList.remove('active'); }
+    if (nav) { nav.classList.remove('active'); }
+  });
+  var target = document.getElementById('page-' + id);
+  var navTarget = document.getElementById('nav-' + id);
+  if (target) { target.classList.add('active'); }
+  if (navTarget) { navTarget.classList.add('active'); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Update URL hash for back-button support
+  history.pushState({ page: id }, '', '#' + id);
+}
+
+// ── MOBILE NAV TOGGLE ──
+function toggleMobile() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.getElementById('hamburger');
+  var isOpen = nav.classList.contains('open');
+  nav.classList.toggle('open');
+  nav.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+  btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+}
+
+// ── SUBSCRIBE CTA ──
+function goSubscribe() {
+  showPage('contact');
+}
+
+// ── CONTACT FORM HANDLER ──
+function handleContactSubmit(e) {
+  e.preventDefault();
+  var form = e.target;
+  var status = document.getElementById('cf-status');
+  var btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  var data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r) {
+    if (r.ok) {
+      status.style.display = 'block';
+      status.style.background = 'rgba(82,112,85,.12)';
+      status.style.color = 'var(--sage)';
+      status.style.border = '1px solid rgba(82,112,85,.3)';
+      status.textContent = 'Message sent — we'll be in touch within 1–2 business days.';
+      form.reset();
+    } else {
+      throw new Error('Server error');
+    }
+  }).catch(function() {
+    status.style.display = 'block';
+    status.style.background = 'rgba(184,78,104,.08)';
+    status.style.color = 'var(--rose)';
+    status.style.border = '1px solid rgba(184,78,104,.25)';
+    status.textContent = 'Something went wrong. Please email hello@aiisapieceofcake.com directly.';
+  }).finally(function() {
+    btn.textContent = 'Send message →';
+    btn.disabled = false;
+  });
+}
+
+// ── HASH ROUTING ON LOAD ──
+(function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash && pages.indexOf(hash) !== -1) {
+    showPage(hash);
+  }
+})();
+
+// ── ACTIVE NAV ON SCROLL (desktop) ──
+document.addEventListener('DOMContentLoaded', function() {
+  // Close mobile nav on outside click
+  document.addEventListener('click', function(e) {
+    var nav = document.getElementById('mobileNav');
+    var btn = document.getElementById('hamburger');
+    if (nav && nav.classList.contains('open') && !nav.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      nav.classList.remove('open');
+      nav.setAttribute('aria-hidden', 'true');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+</script>
+</body>
+</html>

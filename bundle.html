@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://aiapc-site.vercel.app/bundle">
+<title>The Annual Bundle — AI is a Piece of Cake</title>
+<meta name="description" content="Everything AIAPC publishes in a 12-month window. Paid newsletter, mini-guides, Skills Pack, Annual Address, and more. $297/year — 71% off à la carte.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiapc-site.vercel.app/bundle">
+<meta property="og:title" content="The Annual Bundle — AI is a Piece of Cake">
+<meta property="og:description" content="Everything we publish. One price. $297/year.">
+<meta property="og:image" content="https://aiapc-site.vercel.app/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@aicakeweekly">
+<meta name="twitter:title" content="The Annual Bundle — AI is a Piece of Cake">
+<meta name="twitter:description" content="Everything AIAPC publishes in a 12-month window. $297/year — 71% off à la carte.">
+<meta name="twitter:image" content="https://aiapc-site.vercel.app/og-image.png">
+<meta name="theme-color" content="#251205">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Syne:wght@500;600;700&family=Manrope:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:      #FAF4E1;
+  --cream-mid:  #F0E2BC;
+  --cream-card: #FFFDF5;
+  --cocoa:      #251205;
+  --cocoa-mid:  #5A3D22;
+  --cocoa-mute: #8A6A45;
+  --gold:       #C9971F;
+  --gold-lt:    #E8B84B;
+  --rose:       #B84E68;
+  --sage:       #527055;
+  --border:     #D9C28A;
+  --border-lt:  #EDD9A8;
+  --txt-lt:     #FAF4E1;
+  --ff-d: "Cormorant Garamond", Georgia, serif;
+  --ff-h: "Syne", sans-serif;
+  --ff-b: "Manrope", sans-serif;
+  --ff-m: "DM Mono", monospace;
+  --r:    4px;
+  --rlg:  12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--cocoa); border-bottom: 1px solid rgba(201,151,31,.18); display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.5rem,5vw,4rem); height: 64px; }
+.nav-logo { font-family: var(--ff-d); font-size: 1.2rem; font-style: italic; color: var(--gold-lt); text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: clamp(.8rem,2.5vw,2rem); list-style: none; }
+.nav-links a { font-family: var(--ff-h); font-size: .77rem; letter-spacing: .08em; font-weight: 500; color: rgba(250,244,225,.58); text-decoration: none; text-transform: uppercase; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-cta { font-family: var(--ff-h); font-size: .76rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: var(--gold); color: var(--cocoa); padding: .5rem 1.2rem; border-radius: var(--r); cursor: pointer; border: none; transition: background .2s; white-space: nowrap; text-decoration: none; }
+.nav-cta:hover { background: var(--gold-lt); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold-lt); }
+.mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--cocoa); border-bottom: 1px solid rgba(201,151,31,.12); padding: 1.5rem; flex-direction: column; gap: 1rem; z-index: 99; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-family: var(--ff-h); font-size: .9rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: rgba(250,244,225,.68); text-decoration: none; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+
+/* LAYOUT */
+.page-wrap { padding-top: 64px; }
+.sec { padding: clamp(4rem,8vh,6rem) clamp(1.5rem,5vw,4rem); }
+.sec-in { max-width: 1100px; margin: 0 auto; }
+.sec-label { font-family: var(--ff-m); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+.sec-h { font-family: var(--ff-d); font-size: clamp(1.9rem,3.8vw,3.25rem); font-weight: 500; line-height: 1.12; color: var(--cocoa); margin-bottom: 1rem; }
+.sec-p { font-size: 1rem; color: var(--cocoa-mid); max-width: 540px; line-height: 1.65; margin-bottom: 2.75rem; font-weight: 300; }
+
+/* HERO */
+.hero { background: var(--cocoa); padding-top: 64px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%,rgba(201,151,31,.07) 0%,transparent 60%), radial-gradient(ellipse at 80% 20%,rgba(184,78,104,.05) 0%,transparent 50%); pointer-events: none; }
+.hero-in { max-width: 1100px; margin: 0 auto; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,4rem); position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-eyebrow { font-family: var(--ff-m); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+.hero-h { font-family: var(--ff-d); font-size: clamp(2.8rem,5.5vw,5rem); line-height: 1.05; color: var(--txt-lt); font-weight: 500; margin-bottom: 1.25rem; }
+.hero-h em { font-style: italic; color: var(--gold-lt); }
+.hero-sub { font-size: clamp(.95rem,1.4vw,1.1rem); color: rgba(250,244,225,.66); line-height: 1.65; font-weight: 300; }
+.price-card { background: rgba(255,255,255,.05); border: 1px solid rgba(201,151,31,.28); border-radius: var(--rlg); padding: 2rem; }
+.price-main { font-family: var(--ff-d); font-size: 4.5rem; font-weight: 600; color: var(--gold-lt); line-height: 1; }
+.price-period { font-family: var(--ff-m); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,244,225,.42); margin-bottom: 1rem; }
+.price-pills { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.price-pill { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; padding: .28rem .7rem; border-radius: 100px; border: 1px solid rgba(201,151,31,.35); color: var(--gold-lt); background: rgba(201,151,31,.08); }
+.price-pill.accent { background: rgba(201,151,31,.18); border-color: rgba(201,151,31,.5); }
+.btn-bundle { display: inline-block; font-family: var(--ff-h); font-weight: 700; font-size: .88rem; letter-spacing: .06em; text-transform: uppercase; background: var(--gold); color: var(--cocoa); padding: 1rem 2rem; border-radius: var(--r); text-decoration: none; transition: all .2s; width: 100%; text-align: center; margin-bottom: .75rem; }
+.btn-bundle:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,151,31,.28); }
+.price-note { font-family: var(--ff-m); font-size: .61rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(250,244,225,.3); text-align: center; }
+
+/* WHAT'S INCLUDED */
+.included-sec { background: var(--cream); }
+.included-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+.total-banner { background: var(--cocoa); color: var(--txt-lt); border-radius: var(--rlg); padding: 1.25rem 1.75rem; text-align: right; }
+.total-label { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,244,225,.42); margin-bottom: .25rem; }
+.total-strike { font-family: var(--ff-d); font-size: 1.6rem; color: rgba(250,244,225,.28); text-decoration: line-through; }
+.total-price { font-family: var(--ff-d); font-size: 2.2rem; font-weight: 600; color: var(--gold-lt); line-height: 1; }
+.total-save { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-top: .35rem; }
+.item-list { display: flex; flex-direction: column; gap: .75rem; }
+.item-row { display: flex; align-items: center; gap: 1rem; background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.25rem 1.5rem; transition: transform .15s, box-shadow .15s; }
+.item-row:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(92,61,34,.07); }
+.item-icon { font-size: 1.4rem; flex-shrink: 0; width: 2.5rem; text-align: center; }
+.item-body { flex: 1; }
+.item-name { font-family: var(--ff-d); font-size: 1.15rem; font-weight: 500; color: var(--cocoa); margin-bottom: .15rem; }
+.item-desc { font-size: .82rem; color: var(--cocoa-mute); line-height: 1.5; font-weight: 300; }
+.item-badge { font-family: var(--ff-m); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .55rem; border-radius: 100px; background: rgba(90,61,34,.06); color: var(--cocoa-mute); border: 1px solid var(--border-lt); margin-left: .4rem; white-space: nowrap; }
+.item-badge.new-badge { background: rgba(82,112,85,.08); color: var(--sage); border-color: rgba(82,112,85,.25); }
+.item-price { font-family: var(--ff-d); font-size: 1.3rem; font-weight: 600; color: var(--cocoa-mid); flex-shrink: 0; text-align: right; }
+.item-price.free { color: var(--sage); font-size: 1rem; }
+.section-divider { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); padding: 1rem 0 .4rem; }
+.running-total { background: rgba(201,151,31,.07); border: 1px solid rgba(201,151,31,.25); border-radius: var(--rlg); padding: 1.25rem 1.5rem; margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.rt-label { font-family: var(--ff-m); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cocoa-mute); }
+.rt-math { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.rt-acarte { font-family: var(--ff-d); font-size: 1.8rem; color: rgba(90,61,34,.35); text-decoration: line-through; }
+.rt-vs { font-family: var(--ff-m); font-size: .62rem; color: var(--cocoa-mute); letter-spacing: .1em; text-transform: uppercase; }
+.rt-bundle { font-family: var(--ff-d); font-size: 2rem; font-weight: 600; color: var(--gold); }
+.rt-save-badge { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; background: var(--gold); color: var(--cocoa); padding: .3rem .8rem; border-radius: 100px; font-weight: 700; }
+
+/* FAQ */
+.faq-sec { background: var(--cream-mid); }
+.faq-list { display: flex; flex-direction: column; gap: 1px; max-width: 780px; }
+.faq-item { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; margin-bottom: .6rem; }
+.faq-q { font-family: var(--ff-d); font-size: 1.15rem; font-weight: 500; color: var(--cocoa); padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; user-select: none; }
+.faq-q:hover { background: rgba(201,151,31,.04); }
+.faq-arrow { font-size: 1rem; transition: transform .2s; color: var(--gold); flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { display: none; padding: 0 1.5rem 1.25rem; font-size: .92rem; color: var(--cocoa-mid); line-height: 1.7; font-weight: 300; }
+.faq-item.open .faq-a { display: block; }
+
+/* CTA BAND */
+.cta-band { background: var(--cocoa); padding: clamp(4rem,8vh,6rem) clamp(1.5rem,5vw,4rem); }
+.cta-in { max-width: 680px; margin: 0 auto; text-align: center; }
+.cta-h { font-family: var(--ff-d); font-size: clamp(2rem,4vw,3.25rem); font-weight: 500; color: var(--txt-lt); margin-bottom: .75rem; line-height: 1.1; }
+.cta-h em { font-style: italic; color: var(--gold-lt); }
+.cta-p { font-size: .95rem; color: rgba(250,244,225,.55); line-height: 1.65; margin-bottom: 2rem; font-weight: 300; }
+.cta-link { display: block; font-family: var(--ff-m); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,244,225,.38); margin-top: 1.25rem; text-decoration: none; }
+.cta-link:hover { color: var(--gold-lt); }
+
+/* FOOTER */
+.footer { background: var(--cocoa); padding: 3rem clamp(1.5rem,5vw,4rem) 2rem; border-top: 1px solid rgba(201,151,31,.1); }
+.footer-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+.footer-logo { font-family: var(--ff-d); font-size: 1.2rem; font-style: italic; color: var(--gold-lt); margin-bottom: .6rem; }
+.footer-tag { font-size: .82rem; color: rgba(250,244,225,.38); line-height: 1.6; font-weight: 300; max-width: 260px; }
+.footer-col-h { font-family: var(--ff-h); font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,244,225,.32); margin-bottom: 1rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+.footer-links a { font-size: .82rem; color: rgba(250,244,225,.48); text-decoration: none; transition: color .2s; font-weight: 300; }
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-bot { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.05); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.footer-legal { font-family: var(--ff-m); font-size: .61rem; letter-spacing: .06em; color: rgba(250,244,225,.24); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  .hero-in { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer-in { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .included-header { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width:600px) {
+  .rt-math { flex-direction: column; gap: .5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">AI is a Piece of Cake <span style="font-style:normal;font-family:var(--ff-h);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,244,225,.38);margin-left:.4rem;vertical-align:middle">AIAPC</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#newsletter">Newsletter</a></li>
+    <li><a href="/#products" class="active">Products</a></li>
+    <li><a href="/#who">Who We Are</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="/#subscribe">Get Notified &rarr;</a>
+  <button class="hamburger" id="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/#newsletter">Newsletter</a>
+  <a href="/#products">Products</a>
+  <a href="/#who">Who We Are</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<div class="page-wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div>
+      <div class="hero-eyebrow"><span class="hero-dot"></span> Annual Bundle &mdash; 2026&ndash;2027</div>
+      <h1 class="hero-h">Everything we publish.<br><em>One price.</em></h1>
+      <p class="hero-sub">Every paid product AIAPC publishes in your twelve-month window — newsletter tier, mini-guides, Skills Pack, the Annual Address, templates, workbooks, and everything in between. Locked in. No surprises.</p>
+    </div>
+    <div class="price-card">
+      <div class="price-main">$297</div>
+      <div class="price-period">per year &middot; billed annually</div>
+      <div class="price-pills">
+        <span class="price-pill accent">71% off à la carte</span>
+        <span class="price-pill">~$0.81/day</span>
+        <span class="price-pill">$237 renewal lock</span>
+      </div>
+      <a href="#" class="btn-bundle">Get the Annual Bundle &rarr;</a>
+      <div class="price-note">30-day refund &middot; Gumroad checkout &middot; Instant access</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="sec included-sec">
+  <div class="sec-in">
+    <div class="included-header">
+      <div>
+        <div class="sec-label">What's in it</div>
+        <h2 class="sec-h" style="margin-bottom:.5rem">Every paid product.<br>Every category.</h2>
+        <p style="font-size:.92rem;color:var(--cocoa-mute);font-weight:300;max-width:480px">Individual prices shown so the math is transparent. Everything below ships to bundle members as it publishes.</p>
+      </div>
+      <div class="total-banner">
+        <div class="total-label">À la carte value</div>
+        <div class="total-strike">$1,024+</div>
+        <div class="total-price">$297</div>
+        <div class="total-save">You save $727+ &mdash; 71% off</div>
+      </div>
+    </div>
+
+    <div class="item-list">
+
+      <div class="section-divider">Newsletter</div>
+
+      <div class="item-row">
+        <div class="item-icon">📬</div>
+        <div class="item-body">
+          <div class="item-name">Paid Newsletter Tier <span class="item-badge">12 months</span></div>
+          <div class="item-desc">Full access to every paid issue, deep dives, bonus essays, and subscriber Q&amp;A for your entire bundle year.</div>
+        </div>
+        <div class="item-price">$108 <span style="font-family:var(--ff-m);font-size:.6rem;color:var(--cocoa-mute)">($9/mo)</span></div>
+      </div>
+
+      <div class="section-divider">Mini-Guides</div>
+
+      <div class="item-row">
+        <div class="item-icon">⚖️</div>
+        <div class="item-body">
+          <div class="item-name">ChatGPT for Lawyers</div>
+          <div class="item-desc">Practical workflows for legal research, drafting, and client communication. Built for practitioners, not technologists.</div>
+        </div>
+        <div class="item-price">$22</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">🏛️</div>
+        <div class="item-body">
+          <div class="item-name">Harvey for Legal Teams <span class="item-badge new-badge">New</span></div>
+          <div class="item-desc">A team-focused deployment guide for the AI tool built specifically for law firms and legal departments.</div>
+        </div>
+        <div class="item-price">$22</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">🎓</div>
+        <div class="item-body">
+          <div class="item-name">AI for Educators</div>
+          <div class="item-desc">Lesson planning, student feedback, administrative workflows — AI literacy from the classroom up.</div>
+        </div>
+        <div class="item-price">$12</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">🏥</div>
+        <div class="item-body">
+          <div class="item-name">Gemini for Healthcare</div>
+          <div class="item-desc">How clinicians, administrators, and health systems can put Google's AI suite to practical use — safely.</div>
+        </div>
+        <div class="item-price">$12</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">🤖</div>
+        <div class="item-body">
+          <div class="item-name">Getting the Most Out of Claude</div>
+          <div class="item-desc">Prompting frameworks, project setup, and advanced techniques for Anthropic's Claude — for professionals, not engineers.</div>
+        </div>
+        <div class="item-price">$12</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">🔍</div>
+        <div class="item-body">
+          <div class="item-name">Perplexity for Research</div>
+          <div class="item-desc">Citation-backed research workflows using Perplexity AI — built for academics, analysts, and consultants.</div>
+        </div>
+        <div class="item-price">$12</div>
+      </div>
+
+      <div class="section-divider">Signature Products</div>
+
+      <div class="item-row">
+        <div class="item-icon">📅</div>
+        <div class="item-body">
+          <div class="item-name">The Annual Address: State of AI for Professionals <span class="item-badge">January 2027</span></div>
+          <div class="item-desc">Our flagship annual report. Where AI stands for lawyers, clinicians, educators, and executives — what changed, what matters, what's next.</div>
+        </div>
+        <div class="item-price">$47</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">⚡</div>
+        <div class="item-body">
+          <div class="item-name">Skills.md Pack — 12 Reusable Claude Skills</div>
+          <div class="item-desc">A curated library of production-ready Claude Skills (.md files) covering research, writing, analysis, and professional workflows. Drop-in and go.</div>
+        </div>
+        <div class="item-price">$47</div>
+      </div>
+
+      <div class="section-divider">Tools &amp; Extras</div>
+
+      <div class="item-row">
+        <div class="item-icon">📋</div>
+        <div class="item-body">
+          <div class="item-name">AI Policy Implementation Kit</div>
+          <div class="item-desc">Templates, frameworks, and decision guides for organizations building internal AI policy — from acceptable use to governance.</div>
+        </div>
+        <div class="item-price">$47</div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-icon">🃏</div>
+        <div class="item-body">
+          <div class="item-name">Decision Cards, Prompt Packs &amp; Workbooks</div>
+          <div class="item-desc">All supplementary toolkits, template suites, and companion workbooks published in your bundle window — as they release.</div>
+        </div>
+        <div class="item-price">$47+</div>
+      </div>
+
+      <div class="item-row" style="border-color:rgba(82,112,85,.35);background:rgba(82,112,85,.04)">
+        <div class="item-icon">✅</div>
+        <div class="item-body">
+          <div class="item-name">AI Readiness Scorecard</div>
+          <div class="item-desc">A self-assessment tool to benchmark where you and your organization stand on AI adoption. Included free.</div>
+        </div>
+        <div class="item-price free">Included</div>
+      </div>
+
+    </div>
+
+    <div class="running-total">
+      <div>
+        <div class="rt-label">À la carte total vs. bundle price</div>
+      </div>
+      <div class="rt-math">
+        <div class="rt-acarte">$1,024+</div>
+        <div class="rt-vs">vs.</div>
+        <div class="rt-bundle">$297/yr</div>
+        <div class="rt-save-badge">Save $727+</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq-sec">
+  <div class="sec-in">
+    <div class="sec-label">Common questions</div>
+    <h2 class="sec-h" style="margin-bottom:2rem">Everything you need to know.</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What exactly is in the Annual Bundle? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">The bundle includes every paid product AIAPC publishes in your 12-month window: your paid newsletter tier (12 months), all six mini-guides ($92 value), The Annual Address: State of AI for Professionals (January 2027), the Skills.md Pack, the AI Policy Implementation Kit, the AI Readiness Scorecard, and every Decision Card, Prompt Pack, workbook, and template suite we ship during your window. The product list above reflects everything planned — and anything additional we publish goes in automatically.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">When do I get access? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Immediately after purchase via Gumroad. Products that are already published download right away. Products that haven't launched yet — like the Annual Address in January 2027 — will be delivered to your email when they ship. No waiting, no separate purchases.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if a product launches after I buy? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">You get it. Everything published within your 12-month window is included — automatically, at no extra charge. If we ship something new, bundle members receive it. That's the point of the bundle.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What happens at renewal? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Your renewal is locked at $237 for year two — not whatever the bundle price is at that point. You're rewarded for being an early member. Renewal is optional; you'll receive a reminder before it comes up and can cancel at any time.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there a refund policy? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes. If you're not satisfied for any reason within 30 days of purchase, email us at collins.ra@husky.neu.edu and we'll issue a full refund, no questions asked. After 30 days, the purchase is non-refundable.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I buy individual products instead? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes — every product in the bundle is also sold individually on Gumroad. The bundle exists for people who want the full catalog at a significant discount. If you only need one or two guides, individual purchases make sense. If you want everything, the bundle is the obvious choice.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-in">
+    <div class="price-pill accent" style="display:inline-block;margin-bottom:1.25rem">$297/year &middot; ~$0.81/day</div>
+    <h2 class="cta-h">Ready to get<br><em>everything?</em></h2>
+    <p class="cta-p">One price. Every product. Twelve months of AI literacy built for the professionals who actually use these tools.</p>
+    <a href="#" class="btn-bundle" style="max-width:340px;margin:0 auto">Get the Annual Bundle &rarr;</a>
+    <a href="/" class="cta-link">Questions? Get in touch &rarr;</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div>
+      <div class="footer-logo">AI is a Piece of Cake</div>
+      <p class="footer-tag">The weekly newsletter making AI approachable for lawyers, physicians, executives, and educators. Free. Honest. No hype.</p>
+    </div>
+    <div>
+      <div class="footer-col-h">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#newsletter">Newsletter</a></li>
+        <li><a href="/#products">Products</a></li>
+        <li><a href="/#who">Who We Are</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-h">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://twitter.com/aicakeweekly" target="_blank" rel="noopener">@aicakeweekly</a></li>
+        <li><a href="https://twitter.com/rn_collins" target="_blank" rel="noopener">@rn_collins (RN)</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-h">Legal</div>
+      <ul class="footer-links">
+        <li><a href="/AIAPC-Team-License-Terms-v1.pdf" target="_blank" rel="noopener">License Terms</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span class="footer-legal">&copy; 2024&ndash;2026 RN Collins &amp; Vanda Collins. AI is a Piece of Cake. All rights reserved.</span>
+    <span class="footer-legal">Launching November 2026 &middot; <a href="/#contact" style="color:inherit">Get early access &rarr;</a></span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>
