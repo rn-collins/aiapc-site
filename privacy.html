@@ -145,9 +145,9 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <h2>2. What Data We Collect</h2>
     <p>We collect only what's necessary to provide our services:</p>
     <ul>
-      <li><strong>Email address</strong> — when you submit the prelaunch inquiry form or email us directly. Newsletter subscription and product checkout are not currently open.</li>
+      <li><strong>Email address</strong> — only after you send the prepared email or contact us directly. Merely filling the webpage form does not transmit it to AIAPC. Newsletter subscription and product checkout are not currently open.</li>
       <li><strong>Name</strong> — required by the current inquiry form so we can respond appropriately.</li>
-      <li><strong>Message content</strong> — when you send us a message through the contact form.</li>
+      <li><strong>Message content</strong> — only after you send the prepared email from your own email application.</li>
       <li><strong>Usage analytics</strong> — aggregated, anonymized data about how visitors use the site (pages visited, referral sources, general location at the country level). No personally identifiable data is captured in analytics.</li>
       <li><strong>No purchase information at present</strong> — checkout is not open and this site does not collect payment information.</li>
     </ul>
@@ -168,7 +168,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <p>We use a small number of trusted third-party services to operate the site and newsletter. Each has its own privacy policy:</p>
     <ul>
       <li><strong>Beehiiv</strong> — named as the planned newsletter provider, but no live Beehiiv subscription form is connected to this deployment.</li>
-      <li><strong>Same-origin inquiry route</strong> — the contact form submits to AIAPC's own serverless endpoint. Depending on configured services, the inquiry is stored in a private editorial queue and/or delivered by email. The interface reports success only when one of those operations succeeds.</li>
+      <li><strong>Current contact mode</strong> — the form prepares an addressed draft in your own email application. The site does not receive, store, or claim delivery of the message until you choose to send that email. A same-origin automated endpoint exists for future activation but is fail-closed and is not used by the current form because storage and email credentials are not configured.</li>
       <li><strong>Vercel Analytics</strong> — provides anonymized, aggregated site analytics. Vercel does not use cookies and does not collect personally identifiable information. Vercel Privacy Policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.</li>
       <li><strong>Gumroad</strong> — identified as a possible future checkout provider, but no Gumroad checkout is active on this deployment.</li>
     </ul>
