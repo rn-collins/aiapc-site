@@ -342,7 +342,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="goSubscribe()">Get Notified →</button>
-  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-nav" id="mobileNav" aria-hidden="true">
@@ -1214,30 +1214,55 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
 // ── PAGE ROUTER ──
 var pages = ['home','newsletter','products','who','contact'];
 
-function showPage(id) {
+function showPage(id, options) {
+  options = options || {};
+  if (pages.indexOf(id) === -1) { id = 'home'; }
   pages.forEach(function(p) {
     var el = document.getElementById('page-' + p);
     var nav = document.getElementById('nav-' + p);
-    if (el) { el.classList.remove('active'); }
-    if (nav) { nav.classList.remove('active'); }
+    if (el) { el.classList.remove('active'); el.setAttribute('aria-hidden', 'true'); }
+    if (nav) { nav.classList.remove('active'); nav.removeAttribute('aria-current'); }
   });
   var target = document.getElementById('page-' + id);
   var navTarget = document.getElementById('nav-' + id);
-  if (target) { target.classList.add('active'); }
-  if (navTarget) { navTarget.classList.add('active'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Update URL hash for back-button support
-  history.pushState({ page: id }, '', '#' + id);
+  if (target) {
+    target.classList.add('active');
+    target.setAttribute('aria-hidden', 'false');
+    target.setAttribute('tabindex', '-1');
+  }
+  if (navTarget) { navTarget.classList.add('active'); navTarget.setAttribute('aria-current', 'page'); }
+  closeMobile();
+  window.scrollTo({ top: 0, behavior: options.instant ? 'auto' : 'smooth' });
+  var nextHash = '#' + id;
+  if (options.history === 'replace') {
+    history.replaceState({ page: id }, '', nextHash);
+  } else if (options.history !== 'none' && window.location.hash !== nextHash) {
+    history.pushState({ page: id }, '', nextHash);
+  }
+  if (target && !options.skipFocus) {
+    window.setTimeout(function() { target.focus({ preventScroll: true }); }, options.instant ? 0 : 180);
+  }
 }
 
 // ── MOBILE NAV TOGGLE ──
+function closeMobile() {
+  var nav = document.getElementById('mobileNav');
+  var btn = document.getElementById('hamburger');
+  if (!nav || !btn) { return; }
+  nav.classList.remove('open');
+  nav.setAttribute('aria-hidden', 'true');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-label', 'Open navigation menu');
+}
+
 function toggleMobile() {
   var nav = document.getElementById('mobileNav');
   var btn = document.getElementById('hamburger');
-  var isOpen = nav.classList.contains('open');
-  nav.classList.toggle('open');
-  nav.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
-  btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+  var willOpen = !nav.classList.contains('open');
+  nav.classList.toggle('open', willOpen);
+  nav.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+  btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  btn.setAttribute('aria-label', willOpen ? 'Close navigation menu' : 'Open navigation menu');
 }
 
 // ── SUBSCRIBE CTA ──
@@ -1264,10 +1289,14 @@ function handleContactSubmit(e) {
 // ── HASH ROUTING ON LOAD ──
 (function() {
   var hash = window.location.hash.replace('#', '');
-  if (hash && pages.indexOf(hash) !== -1) {
-    showPage(hash);
-  }
+  var initialPage = hash && pages.indexOf(hash) !== -1 ? hash : 'home';
+  showPage(initialPage, { history: 'replace', instant: true, skipFocus: true });
 })();
+
+window.addEventListener('popstate', function() {
+  var hash = window.location.hash.replace('#', '');
+  showPage(pages.indexOf(hash) !== -1 ? hash : 'home', { history: 'none', instant: true });
+});
 
 // ── ACTIVE NAV ON SCROLL (desktop) ──
 document.addEventListener('DOMContentLoaded', function() {
@@ -1277,9 +1306,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var nav = document.getElementById('mobileNav');
     var btn = document.getElementById('hamburger');
     if (nav && nav.classList.contains('open') && !nav.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-      nav.classList.remove('open');
-      nav.setAttribute('aria-hidden', 'true');
-      btn.setAttribute('aria-expanded', 'false');
+      closeMobile();
     }
   });
 });
