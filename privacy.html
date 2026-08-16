@@ -148,7 +148,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
       <li><strong>Email address</strong> — only after you send the prepared email or contact us directly. Merely filling the webpage form does not transmit it to AIAPC. Newsletter subscription and product checkout are not currently open.</li>
       <li><strong>Name</strong> — required by the current inquiry form so we can respond appropriately.</li>
       <li><strong>Message content</strong> — only after you send the prepared email from your own email application.</li>
-      <li><strong>Usage analytics</strong> — aggregated, anonymized data about how visitors use the site (pages visited, referral sources, general location at the country level). No personally identifiable data is captured in analytics.</li>
+      <li><strong>No site analytics at present</strong> — this deployment does not load a visitor analytics or behavioral-tracking script.</li>
       <li><strong>No purchase information at present</strong> — checkout is not open and this site does not collect payment information.</li>
     </ul>
     <p>We do not use cookies for tracking. We do not collect IP addresses, fingerprint browsers, or build behavioral profiles.</p>
@@ -156,11 +156,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <h2>3. How We Use Your Data</h2>
     <p>We use the information we collect for specific, limited purposes:</p>
     <ul>
-      <li>To send the AIAPC newsletter and product announcements to subscribers who opted in.</li>
-      <li>To respond to contact form submissions and inquiries.</li>
-      <li>To deliver purchased products (guides, Skills Packs, Annual Bundle) to customers.</li>
-      <li>To send a direct response to a submitted inquiry. No newsletter or purchase email program is active on this deployment.</li>
-      <li>To understand aggregate site usage so we can improve content and navigation.</li>
+      <li>For a future newsletter or product-announcement program only after a separate subscription flow opens and the visitor affirmatively opts in.</li>
+      <li>To respond to an inquiry after the visitor reviews and sends the prepared email from their own email application.</li>
+      <li>To deliver future purchased products only after checkout opens under separate purchase terms.</li>
+      <li>No newsletter, checkout, automated inquiry-delivery, or purchase-email program is active on this deployment.</li>
+      
     </ul>
     <p>We do not use your email address for advertising, retargeting, or any purpose beyond the above.</p>
 
@@ -169,16 +169,16 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <ul>
       <li><strong>Beehiiv</strong> — named as the planned newsletter provider, but no live Beehiiv subscription form is connected to this deployment.</li>
       <li><strong>Current contact mode</strong> — the form prepares an addressed draft in your own email application. The site does not receive, store, or claim delivery of the message until you choose to send that email. A same-origin automated endpoint exists for future activation but is fail-closed and is not used by the current form because storage and email credentials are not configured.</li>
-      <li><strong>Vercel Analytics</strong> — provides anonymized, aggregated site analytics. Vercel does not use cookies and does not collect personally identifiable information. Vercel Privacy Policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.</li>
+      <li><strong>Vercel</strong> — hosts and serves this deployment. No Vercel Analytics script is loaded by the site. Hosting infrastructure may process ordinary request metadata under Vercel's <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">privacy policy</a>.</li>
       <li><strong>Gumroad</strong> — identified as a possible future checkout provider, but no Gumroad checkout is active on this deployment.</li>
     </ul>
-    <p>We have no affiliation with these companies beyond using their services. We do not share your data with any other third parties.</p>
+    <p>Beehiiv and Gumroad are disclosed as planned providers only; they do not receive visitor data from this deployment. The current webpage does not transmit inquiry content to Formspree or another form processor.</p>
 
     <h2>5. We Do Not Sell Your Data</h2>
     <p>We do not sell, rent, license, or otherwise transfer your personal information to any third party for commercial purposes. Full stop.</p>
 
     <h2>6. Data Retention</h2>
-    <p>We retain inquiry information only as long as needed to respond, administer the requested relationship, resolve disputes, and meet applicable recordkeeping obligations. A deletion request will be acted on within 30 days unless retention is legally required. Note that third-party processors (Beehiiv, Formspree, Gumroad) may retain records per their own policies.</p>
+    <p>The website itself does not store the current form fields. If you send the prepared email, the resulting correspondence is retained only as long as needed to respond, administer the requested relationship, resolve disputes, and meet applicable recordkeeping obligations. A deletion request will be acted on within 30 days unless retention is legally required.</p>
 
     <h2>7. Your Rights</h2>
     <p>You have the following rights regarding your personal information:</p>
@@ -191,7 +191,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <p>To exercise any of these rights, email <a href="mailto:collins.ra@northeastern.edu">collins.ra@northeastern.edu</a> with the subject line "Privacy Request." We will respond within 10 business days.</p>
 
     <h2>8. Data Security</h2>
-    <p>We take reasonable technical and organizational measures to protect your personal information. Our site is served over HTTPS. Access to subscriber data is limited to the site operator (RN Collins). That said, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
+    <p>Our site is served over HTTPS. No subscriber database is connected to this deployment. If you send an email, access to that correspondence is limited to the operator and the email providers involved in transmission. No method of electronic transmission or storage is 100% secure.</p>
 
     <h2>9. Children's Privacy</h2>
     <p>Our services are intended for professionals and adults. We do not knowingly collect personal information from anyone under the age of 13. If you believe we have inadvertently collected data from a minor, please contact us and we will delete it promptly.</p>
@@ -215,7 +215,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   <div class="footer-in">
     <div>
       <div class="footer-logo">AI is a Piece of Cake</div>
-      <p class="footer-tag">The weekly newsletter making AI approachable for lawyers, physicians, executives, and educators. Free. Honest. No hype.</p>
+      <p class="footer-tag">A planned AI-literacy newsletter for lawyers, physicians, executives, and educators. Free public edition. Honest. No hype.</p>
     </div>
     <div>
       <div class="footer-col-h">Navigate</div>
