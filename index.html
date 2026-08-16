@@ -1160,7 +1160,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
           <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-message">Message</label>
           <textarea id="cf-message" name="message" required rows="5" placeholder="Your message…" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;resize:vertical;transition:border-color .2s;min-height:120px" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"></textarea>
         </div>
-        <label style="display:flex;gap:.65rem;align-items:flex-start;font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;margin-bottom:1rem"><input id="cf-consent" type="checkbox" required style="margin-top:.2rem"> <span>I consent to AIAPC storing and using this information to respond to this inquiry. See the <a href="/privacy">Privacy Policy</a>.</span></label><div id="cf-status" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:var(--r);font-family:var(--ff-m);font-size:.72rem;letter-spacing:.06em"></div>
+        <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;margin-bottom:1rem">Submitting prepares an addressed draft in your email application. The website does not receive it until you review and send that email. See the <a href="/privacy">Privacy Policy</a>.</p><div id="cf-status" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:var(--r);font-family:var(--ff-m);font-size:.72rem;letter-spacing:.06em"></div>
         <button type="submit" class="btn btn-gold">Send message &rarr;</button>
         <p style="font-family:var(--ff-m);font-size:.61rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cocoa-mute);margin-top:1rem">We respond within 1–2 business days.</p>
       </form>
@@ -1247,22 +1247,18 @@ function goSubscribe() {
 }
 
 // ── CONTACT FORM HANDLER ──
-async function handleContactSubmit(e) {
+function handleContactSubmit(e) {
   e.preventDefault();
-  var form=e.target,status=document.getElementById('cf-status'),button=form.querySelector('button[type="submit"]');
-  var payload={name:document.getElementById('cf-name').value.trim(),email:document.getElementById('cf-email').value.trim(),inquiryType:document.getElementById('inquiry-type-select').value,message:document.getElementById('cf-message').value.trim(),consent:document.getElementById('cf-consent').checked,source:'aiapc-site'};
-  status.style.display='block';button.disabled=true;button.textContent='Sending…';
-  try {
-    var response=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    var data=await response.json().catch(function(){return{}});
-    if(!response.ok)throw new Error(data.error||'Inquiry delivery failed');
-    status.style.background='rgba(82,112,85,.12)';status.style.color='var(--sage)';status.style.border='1px solid rgba(82,112,85,.3)';
-    status.textContent='Inquiry received. Reference: '+data.reference;form.reset();button.textContent='Sent ✓';
-  } catch(error) {
-    status.style.background='rgba(184,78,104,.1)';status.style.color='var(--rose)';status.style.border='1px solid rgba(184,78,104,.3)';
-    status.innerHTML='The form could not confirm delivery. Email <a href="mailto:collins.ra@northeastern.edu">collins.ra@northeastern.edu</a> directly. No success was recorded.';
-    button.disabled=false;button.textContent='Send message →';
-  }
+  var form=e.target,status=document.getElementById('cf-status');
+  var name=document.getElementById('cf-name').value.trim();
+  var email=document.getElementById('cf-email').value.trim();
+  var inquiryType=document.getElementById('inquiry-type-select').value||'general';
+  var message=document.getElementById('cf-message').value.trim();
+  var subject='AIAPC Inquiry: '+inquiryType;
+  var body='Name: '+name+'\nEmail: '+email+'\nInquiry Type: '+inquiryType+'\n\nMessage:\n'+message;
+  window.location.href='mailto:collins.ra@northeastern.edu?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  status.style.display='block';status.style.background='rgba(82,112,85,.12)';status.style.color='var(--sage)';status.style.border='1px solid rgba(82,112,85,.3)';
+  status.textContent='Email draft opened. Your message has not been sent until you review and send it in your email application.';
 }
 
 // ── HASH ROUTING ON LOAD ──

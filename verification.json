@@ -7,7 +7,7 @@
   "status": "prelaunch education platform",
   "newsletterSubscriptionOpen": false,
   "checkoutOpen": false,
-  "inquiryConsentRequired": true,
+  "inquiryConsentRequired": false,
   "downloadInventory": [
     {
       "path": "/AIAPC-Team-License-Terms-v1.pdf",
@@ -22,5 +22,8 @@
     "/api/status",
     "/api/lead"
   ],
-  "claimsBoundary": "Future products, cadence, prices, savings, and dates are planning information until active enrollment or checkout exists."
+  "claimsBoundary": "Future products, cadence, prices, savings, and dates are planning information until active enrollment or checkout exists.",
+  "inquiryMode": "local-email-draft",
+  "automatedInquiryDeliveryConfigured": false,
+  "inquiryContract": "The site opens an addressed email draft and does not claim the message was sent."
 }
