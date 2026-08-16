@@ -1,0 +1,26 @@
+{
+  "buildId": "RN-B015",
+  "repairCard": "RR-015",
+  "canonical": "https://aiapc-site.vercel.app",
+  "verifiedAt": "2026-08-15",
+  "repository": "rn-collins/aiapc-site",
+  "status": "prelaunch education platform",
+  "newsletterSubscriptionOpen": false,
+  "checkoutOpen": false,
+  "inquiryConsentRequired": true,
+  "downloadInventory": [
+    {
+      "path": "/AIAPC-Team-License-Terms-v1.pdf",
+      "status": "available"
+    }
+  ],
+  "routes": [
+    "/",
+    "/bundle",
+    "/privacy",
+    "/terms",
+    "/api/status",
+    "/api/lead"
+  ],
+  "claimsBoundary": "Future products, cadence, prices, savings, and dates are planning information until active enrollment or checkout exists."
+}

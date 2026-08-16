@@ -108,6 +108,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <li><a href="/#products">Products</a></li>
     <li><a href="/#who">Who We Are</a></li>
     <li><a href="/#contact">Contact</a></li>
+        <li><a href="/terms">Website Terms</a></li>
   </ul>
   <a class="nav-cta" href="/#subscribe">Get Notified &rarr;</a>
   <button class="hamburger" id="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
@@ -144,11 +145,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <h2>2. What Data We Collect</h2>
     <p>We collect only what's necessary to provide our services:</p>
     <ul>
-      <li><strong>Email address</strong> — when you subscribe to the newsletter, sign up for early access, submit a contact form, or purchase a product.</li>
-      <li><strong>Name</strong> — optionally provided via the contact form or newsletter signup.</li>
+      <li><strong>Email address</strong> — when you submit the prelaunch inquiry form or email us directly. Newsletter subscription and product checkout are not currently open.</li>
+      <li><strong>Name</strong> — required by the current inquiry form so we can respond appropriately.</li>
       <li><strong>Message content</strong> — when you send us a message through the contact form.</li>
       <li><strong>Usage analytics</strong> — aggregated, anonymized data about how visitors use the site (pages visited, referral sources, general location at the country level). No personally identifiable data is captured in analytics.</li>
-      <li><strong>Purchase information</strong> — if you buy a product on Gumroad, Gumroad processes the transaction. We receive your email address and name from Gumroad to fulfill your order. We do not receive or store payment card information.</li>
+      <li><strong>No purchase information at present</strong> — checkout is not open and this site does not collect payment information.</li>
     </ul>
     <p>We do not use cookies for tracking. We do not collect IP addresses, fingerprint browsers, or build behavioral profiles.</p>
 
@@ -158,7 +159,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
       <li>To send the AIAPC newsletter and product announcements to subscribers who opted in.</li>
       <li>To respond to contact form submissions and inquiries.</li>
       <li>To deliver purchased products (guides, Skills Packs, Annual Bundle) to customers.</li>
-      <li>To send transactional emails related to your purchase or subscription (receipts, renewal reminders, product delivery).</li>
+      <li>To send a direct response to a submitted inquiry. No newsletter or purchase email program is active on this deployment.</li>
       <li>To understand aggregate site usage so we can improve content and navigation.</li>
     </ul>
     <p>We do not use your email address for advertising, retargeting, or any purpose beyond the above.</p>
@@ -166,10 +167,10 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <h2>4. Third-Party Services</h2>
     <p>We use a small number of trusted third-party services to operate the site and newsletter. Each has its own privacy policy:</p>
     <ul>
-      <li><strong>Beehiiv</strong> — powers the AIAPC newsletter. When you subscribe, your email (and optionally your name) is stored in Beehiiv's systems. Beehiiv Privacy Policy: <a href="https://www.beehiiv.com/privacy" target="_blank" rel="noopener">beehiiv.com/privacy</a>.</li>
-      <li><strong>Formspree</strong> — handles contact form submissions. When you submit a contact form, your name, email, and message are processed by Formspree and forwarded to our inbox. Formspree Privacy Policy: <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">formspree.io/legal/privacy-policy</a>.</li>
+      <li><strong>Beehiiv</strong> — named as the planned newsletter provider, but no live Beehiiv subscription form is connected to this deployment.</li>
+      <li><strong>Same-origin inquiry route</strong> — the contact form submits to AIAPC's own serverless endpoint. Depending on configured services, the inquiry is stored in a private editorial queue and/or delivered by email. The interface reports success only when one of those operations succeeds.</li>
       <li><strong>Vercel Analytics</strong> — provides anonymized, aggregated site analytics. Vercel does not use cookies and does not collect personally identifiable information. Vercel Privacy Policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.</li>
-      <li><strong>Gumroad</strong> — processes product purchases. Gumroad handles payment processing and sends us your email and name to fulfill your order. Gumroad Privacy Policy: <a href="https://gumroad.com/privacy" target="_blank" rel="noopener">gumroad.com/privacy</a>.</li>
+      <li><strong>Gumroad</strong> — identified as a possible future checkout provider, but no Gumroad checkout is active on this deployment.</li>
     </ul>
     <p>We have no affiliation with these companies beyond using their services. We do not share your data with any other third parties.</p>
 
@@ -177,12 +178,12 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <p>We do not sell, rent, license, or otherwise transfer your personal information to any third party for commercial purposes. Full stop.</p>
 
     <h2>6. Data Retention</h2>
-    <p>We retain your email address and related information for as long as you are subscribed to the newsletter or have an active product relationship with us. If you unsubscribe or request deletion, we will remove your data from our active systems within 30 days. Note that third-party processors (Beehiiv, Formspree, Gumroad) may retain records per their own policies.</p>
+    <p>We retain inquiry information only as long as needed to respond, administer the requested relationship, resolve disputes, and meet applicable recordkeeping obligations. A deletion request will be acted on within 30 days unless retention is legally required. Note that third-party processors (Beehiiv, Formspree, Gumroad) may retain records per their own policies.</p>
 
     <h2>7. Your Rights</h2>
     <p>You have the following rights regarding your personal information:</p>
     <ul>
-      <li><strong>Unsubscribe</strong> — every newsletter email includes an unsubscribe link. One click removes you from the list.</li>
+      <li><strong>Newsletter status</strong> — no live newsletter subscription is currently collected through this deployment. Any future newsletter will provide an unsubscribe control before subscriptions open.</li>
       <li><strong>Access</strong> — you can request a copy of the personal data we hold about you.</li>
       <li><strong>Correction</strong> — you can ask us to correct inaccurate information.</li>
       <li><strong>Deletion</strong> — you can request that we delete your personal data from our records.</li>
@@ -224,6 +225,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
         <li><a href="/#products">Products</a></li>
         <li><a href="/#who">Who We Are</a></li>
         <li><a href="/#contact">Contact</a></li>
+        <li><a href="/terms">Website Terms</a></li>
       </ul>
     </div>
     <div>
@@ -239,6 +241,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
         <li><a href="/AIAPC-Team-License-Terms-v1.pdf" target="_blank" rel="noopener">License Terms</a></li>
         <li><a href="/privacy">Privacy Policy</a></li>
         <li><a href="/#contact">Contact</a></li>
+        <li><a href="/terms">Website Terms</a></li>
       </ul>
     </div>
   </div>
