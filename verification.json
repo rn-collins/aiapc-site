@@ -1,29 +1,18 @@
 {
-  "buildId": "RN-B015",
-  "repairCard": "RR-015",
-  "canonical": "https://aiapc-site.vercel.app",
-  "verifiedAt": "2026-08-15",
-  "repository": "rn-collins/aiapc-site",
-  "status": "prelaunch education platform",
-  "newsletterSubscriptionOpen": false,
+  "build": "RN-B016",
+  "releaseReview": "RR-016",
+  "verifiedAt": "2026-08-19",
+  "releaseState": "prelaunch",
   "checkoutOpen": false,
-  "inquiryConsentRequired": false,
-  "downloadInventory": [
-    {
-      "path": "/AIAPC-Team-License-Terms-v1.pdf",
-      "status": "available"
-    }
-  ],
+  "leadEndpoint": "retired",
+  "privacyPosture": "No first-party analytics; hosting provider processes request metadata.",
+  "licenseFramework": "Draft only; not in effect.",
   "routes": [
     "/",
     "/bundle",
     "/privacy",
     "/terms",
-    "/api/status",
-    "/api/lead"
-  ],
-  "claimsBoundary": "Future products, cadence, prices, savings, and dates are planning information until active enrollment or checkout exists.",
-  "inquiryMode": "local-email-draft",
-  "automatedInquiryDeliveryConfigured": false,
-  "inquiryContract": "The site opens an addressed email draft and does not claim the message was sent."
+    "/404.html",
+    "/api/status"
+  ]
 }
