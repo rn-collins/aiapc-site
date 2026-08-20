@@ -1,0 +1,15 @@
+{
+  "id": "/",
+  "name": "AI is a Piece of Cake",
+  "short_name": "AIAPC",
+  "description": "Prelaunch AI-literacy education for professional audiences.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF4E1",
+  "theme_color": "#251205",
+  "icons": [
+    {"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"},
+    {"src":"/icon-maskable.svg","sizes":"any","type":"image/svg+xml","purpose":"maskable"}
+  ]
+}

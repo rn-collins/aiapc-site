@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">AIAPC cake mark</title>
+  <rect width="64" height="64" rx="14" fill="#251205"/>
+  <path d="M14 28h36l-5 22H19z" fill="#FAF4E1"/>
+  <path d="M16 27c4-8 11-12 21-12 7 0 12 3 14 9-8-2-14 0-20 5-5 4-10 3-15-2z" fill="#E8B84B"/>
+  <circle cx="39" cy="17" r="4" fill="#B84E68"/>
+</svg>

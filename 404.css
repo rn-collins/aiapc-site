@@ -1,0 +1,1 @@
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#251205;color:#faf4e1;font:16px/1.6 system-ui,sans-serif}main{max-width:620px;padding:2rem;text-align:center}h1{font:clamp(3rem,12vw,7rem)/1 Georgia,serif;color:#e8b84b;margin:.2em}a{color:#e8b84b}

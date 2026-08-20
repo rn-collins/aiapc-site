@@ -36,326 +36,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Syne:wght@500;600;700&family=Manrope:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<style>
-/* ── TOKENS ── */
-:root {
-  --cream:      #FAF4E1;
-  --cream-mid:  #F0E2BC;
-  --cream-card: #FFFDF5;
-  --cocoa:      #251205;
-  --cocoa-mid:  #5A3D22;
-  --cocoa-mute: #8A6A45;
-  --gold:       #C9971F;
-  --gold-lt:    #E8B84B;
-  --rose:       #B84E68;
-  --sage:       #527055;
-  --border:     #D9C28A;
-  --border-lt:  #EDD9A8;
-  --txt-lt:     #FAF4E1;
-  --ff-d: "Cormorant Garamond", Georgia, serif;
-  --ff-h: "Syne", sans-serif;
-  --ff-b: "Manrope", sans-serif;
-  --ff-m: "DM Mono", monospace;
-  --r:    4px;
-  --rlg:  12px;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-
-/* ── NAV ── */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: var(--cocoa); border-bottom: 1px solid rgba(201,151,31,.18);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 clamp(1.5rem,5vw,4rem); height: 64px;
-}
-.nav-logo { font-family: var(--ff-d); font-size: 1.2rem; font-style: italic; color: var(--gold-lt); cursor: pointer; text-decoration: none; border: none; background: none; }
-.nav-links { display: flex; align-items: center; gap: clamp(.8rem,2.5vw,2rem); list-style: none; }
-.nav-links a { font-family: var(--ff-h); font-size: .77rem; letter-spacing: .08em; font-weight: 500; color: rgba(250,244,225,.58); text-decoration: none; text-transform: uppercase; transition: color .2s; cursor: pointer; }
-.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
-.nav-cta { font-family: var(--ff-h); font-size: .76rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: var(--gold); color: var(--cocoa); padding: .5rem 1.2rem; border-radius: var(--r); cursor: pointer; border: none; transition: background .2s; white-space: nowrap; }
-.nav-cta:hover { background: var(--gold-lt); }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold-lt); }
-.mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--cocoa); border-bottom: 1px solid rgba(201,151,31,.12); padding: 1.5rem; flex-direction: column; gap: 1rem; z-index: 99; }
-.mobile-nav.open { display: flex; }
-.mobile-nav a { font-family: var(--ff-h); font-size: .9rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: rgba(250,244,225,.68); text-decoration: none; cursor: pointer; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.05); }
-
-/* ── PAGES ── */
-.page { display: none; opacity: 0; }
-.page.active { display: block; animation: pageFadeIn .15s ease forwards; }
-@keyframes pageFadeIn { from { opacity:0; } to { opacity:1; } }
-
-/* ── SHARED BUTTONS ── */
-.btn { font-family: var(--ff-h); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border-radius: var(--r); cursor: pointer; border: none; text-decoration: none; transition: all .2s; display: inline-block; font-size: .83rem; }
-.btn-gold { background: var(--gold); color: var(--cocoa); padding: .85rem 1.9rem; }
-.btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,151,31,.28); }
-.btn-ghost { background: transparent; color: rgba(250,244,225,.62); padding: .85rem 1.9rem; border: 1px solid rgba(250,244,225,.16); }
-.btn-ghost:hover { border-color: rgba(250,244,225,.42); color: var(--txt-lt); }
-.btn-outline-gold { background: transparent; color: var(--gold); padding: .6rem 1.4rem; border: 1px solid rgba(201,151,31,.38); font-size: .77rem; }
-.btn-outline-gold:hover { background: rgba(201,151,31,.08); }
-
-/* ── SECTION SHELL ── */
-.sec { padding: clamp(4rem,8vh,6rem) clamp(1.5rem,5vw,4rem); }
-.sec-in { max-width: 1200px; margin: 0 auto; }
-.sec-label { font-family: var(--ff-m); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
-.sec-label-mute { color: var(--cocoa-mute); }
-.sec-h { font-family: var(--ff-d); font-size: clamp(1.9rem,3.8vw,3.25rem); font-weight: 500; line-height: 1.12; color: var(--cocoa); margin-bottom: 1rem; }
-.sec-h-lt { color: var(--txt-lt); }
-.sec-p { font-size: 1rem; color: var(--cocoa-mid); max-width: 540px; line-height: 1.65; margin-bottom: 2.75rem; font-weight: 300; }
-.sec-p-lt { color: rgba(250,244,225,.62); }
-
-/* ── DARK CLIP SECTION ── */
-.dark-clip { background: var(--cocoa); clip-path: polygon(0 40px,100% 0,100% calc(100% - 40px),0 100%); padding: clamp(6rem,11vh,9rem) clamp(1.5rem,5vw,4rem); }
-
-/* ── HERO ── */
-.hero { background: var(--cocoa); min-height: 100vh; padding-top: 64px; display: flex; align-items: center; position: relative; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%,rgba(201,151,31,.07) 0%,transparent 60%), radial-gradient(ellipse at 80% 20%,rgba(184,78,104,.05) 0%,transparent 50%); pointer-events: none; }
-.hero-in { max-width: 1200px; margin: 0 auto; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,4rem); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; position: relative; z-index: 2; }
-.hero-h { font-family: var(--ff-d); font-size: clamp(3rem,6vw,5.5rem); line-height: 1.05; color: var(--txt-lt); font-weight: 500; margin-bottom: 1.5rem; }
-.hero-h em { font-style: italic; color: var(--gold-lt); }
-.hero-sub { font-size: clamp(.95rem,1.4vw,1.1rem); color: rgba(250,244,225,.66); line-height: 1.65; margin-bottom: 2rem; font-weight: 300; max-width: 440px; }
-
-/* Stat cards */
-.stat-ring { display: flex; flex-direction: column; gap: 1.25rem; }
-.stat-card { background: rgba(255,255,255,.04); border: 1px solid rgba(201,151,31,.15); border-radius: var(--rlg); padding: 1.25rem 1.5rem; }
-.stat-n { font-family: var(--ff-d); font-size: 2.5rem; font-weight: 600; color: var(--gold-lt); line-height: 1; margin-bottom: .25rem; }
-.stat-l { font-family: var(--ff-m); font-size: .67rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,244,225,.42); }
-
-/* ── SECTION CARDS (4 guaranteed) ── */
-.cards-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
-.sec-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 2rem; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; }
-.sec-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(92,61,34,.09); }
-@media (hover: none) { .sec-card:active { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(92,61,34,.08); } }
-.sec-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.sec-card.c-gold::before { background: var(--gold); }
-.sec-card.c-rose::before { background: var(--rose); }
-.sec-card.c-sage::before { background: var(--sage); }
-.sec-card.c-cocoa::before { background: var(--cocoa-mid); }
-.card-ico { font-size: 1.75rem; margin-bottom: 1rem; display: block; }
-.card-lbl { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .45rem; }
-.card-h { font-family: var(--ff-d); font-size: 1.55rem; font-weight: 500; color: var(--cocoa); margin-bottom: .7rem; line-height: 1.2; }
-.card-p { font-size: .88rem; color: var(--cocoa-mid); line-height: 1.6; font-weight: 300; }
-.card-freq { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cocoa-mute); margin-top: 1.2rem; padding-top: .9rem; border-top: 1px solid var(--border-lt); }
-
-/* Rotating section mini cards */
-.rotating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2rem; }
-.rot-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; position: relative; }
-.rot-badge { display: inline-block; font-family: var(--ff-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; padding: .22rem .6rem; border-radius: 100px; background: rgba(90,61,34,.06); color: var(--cocoa-mute); border: 1px solid var(--border-lt); margin-bottom: .75rem; }
-.rot-lbl { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .35rem; }
-.rot-h { font-family: var(--ff-d); font-size: 1.2rem; font-weight: 500; color: var(--cocoa); margin-bottom: .45rem; }
-.rot-p { font-size: .8rem; color: var(--cocoa-mute); line-height: 1.5; font-weight: 300; }
-.rot-freq { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cocoa-mute); margin-top: .75rem; }
-
-/* ── WHO WE ARE (homepage teaser) ── */
-.lane-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.lane-card { background: rgba(255,255,255,.04); border: 1px solid rgba(201,151,31,.14); border-radius: var(--rlg); padding: 2rem; }
-.lane-init { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-d); font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
-.lane-init.rn { background: linear-gradient(135deg,var(--gold),var(--rose)); color: var(--cocoa); }
-.lane-init.vc { background: linear-gradient(135deg,var(--sage),var(--gold)); color: var(--cocoa); }
-.lane-name { font-family: var(--ff-d); font-size: 1.5rem; font-weight: 500; color: var(--txt-lt); margin-bottom: .2rem; }
-.lane-role { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block; }
-.lane-bio { font-size: .87rem; color: rgba(250,244,225,.6); line-height: 1.65; font-weight: 300; }
-
-/* ── BRAND LINKS (RN's work) ── */
-.brand-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.1rem; }
-.brand-link { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; padding: .25rem .65rem; border-radius: 100px; background: rgba(201,151,31,.08); color: var(--gold-lt); border: 1px solid rgba(201,151,31,.16); text-decoration: none; transition: background .2s; }
-.brand-link:hover { background: rgba(201,151,31,.16); }
-
-/* ── LAUNCH BADGE ── */
-.badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(201,151,31,.07); border: 1px solid rgba(201,151,31,.26); border-radius: 100px; padding: .33rem .9rem; font-family: var(--ff-m); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-
-/* ── BEEHIIV EMBED / SUBSCRIBE ──
-   Replace .embed-placeholder with your actual Beehiiv embed snippet.
-   Steps:
-   1. Log in to Beehiiv → Settings → Forms → Embed
-   2. Copy the embed snippet
-   3. Delete the .embed-placeholder div
-   4. Paste the Beehiiv snippet in its place
-   Publication: aiisapieceofcake.beehiiv.com
-*/
-.embed-sec { background: var(--cream-mid); }
-.embed-box { max-width: 600px; margin: 0 auto; text-align: center; }
-.embed-h { font-family: var(--ff-d); font-size: clamp(1.9rem,3.5vw,3rem); font-weight: 500; color: var(--cocoa); margin-bottom: .75rem; line-height: 1.15; }
-.embed-p { color: var(--cocoa-mid); font-size: .96rem; line-height: 1.65; margin-bottom: 1.75rem; font-weight: 300; }
-.embed-note { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cocoa-mute); }
-
-/* ── NEWSLETTER PAGE ── */
-.page-hero { background: var(--cocoa); padding: calc(64px + 5rem) clamp(1.5rem,5vw,4rem) 6rem; }
-.page-hero-in { max-width: 1200px; margin: 0 auto; }
-.section-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 820px; margin-bottom: 3rem; }
-.sec-list-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; }
-.sec-list-head { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .7rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border-lt); }
-.sec-list-head.guaranteed { color: var(--gold); }
-.sec-list-head.rotating { color: var(--cocoa-mute); }
-.sec-list-item { display: flex; gap: .6rem; align-items: baseline; margin-bottom: .5rem; }
-.sec-list-item:last-child { margin-bottom: 0; }
-.sec-list-ico { font-size: .75rem; flex-shrink: 0; }
-.sec-list-name { font-family: var(--ff-h); font-size: .8rem; font-weight: 600; color: var(--cocoa); }
-.sec-list-desc { font-size: .73rem; color: var(--cocoa-mute); font-weight: 300; }
-.sec-list-freq { font-family: var(--ff-m); font-size: .6rem; color: var(--cocoa-mute); letter-spacing: .06em; }
-.diff-box { background: rgba(201,151,31,.05); border: 1px solid rgba(201,151,31,.18); border-radius: var(--rlg); padding: 1.5rem; max-width: 820px; margin-bottom: 3rem; }
-.tiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 820px; }
-.tier-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; }
-.tier-hd { padding: 1.75rem; border-bottom: 1px solid var(--border-lt); }
-.tier-hd.dark { background: var(--cocoa); }
-.tier-nm { font-family: var(--ff-h); font-size: .76rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .4rem; }
-.tier-nm.lt { color: rgba(250,244,225,.42); }
-.tier-price { font-family: var(--ff-d); font-size: 3rem; font-weight: 500; color: var(--cocoa); line-height: 1; }
-.tier-price.lt { color: var(--txt-lt); }
-.tier-per { font-family: var(--ff-m); font-size: .72rem; color: var(--cocoa-mute); }
-.tier-per.lt { color: rgba(250,244,225,.35); }
-.tier-bd { padding: 1.5rem 1.75rem; }
-.benefit-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
-.benefit-list li { display: flex; gap: .65rem; align-items: flex-start; font-size: .86rem; color: var(--cocoa-mid); line-height: 1.5; font-weight: 300; }
-.benefit-list li .chk { color: var(--gold); font-size: .78rem; margin-top: .1em; flex-shrink: 0; }
-.cadence-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2.5rem; padding: 1.75rem; background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); max-width: 820px; }
-.cad-lbl { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .2rem; }
-.cad-val { font-family: var(--ff-h); font-size: .88rem; font-weight: 600; color: var(--cocoa); }
-.aud-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1.5rem; }
-.aud-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; }
-
-/* ── PRODUCTS PAGE ── */
-.persuasion-intro { background: var(--cocoa); padding: 2.5rem; border-radius: var(--rlg); margin-bottom: 3rem; max-width: 820px; }
-.product-ladder { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-.product-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }
-.product-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(92,61,34,.1); }
-.product-hd { padding: 1.75rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border-lt); }
-.product-step { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .4rem; }
-.product-name { font-family: var(--ff-d); font-size: 1.45rem; font-weight: 500; color: var(--cocoa); line-height: 1.2; margin-bottom: .2rem; }
-.product-tag { font-family: var(--ff-d); font-size: .95rem; color: var(--cocoa-mute); font-style: italic; }
-.product-bd { padding: 1.5rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
-.product-price { font-family: var(--ff-m); font-size: 1rem; color: var(--gold); margin-bottom: 1.1rem; font-weight: 500; }
-.module-list { list-style: none; flex: 1; display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.5rem; }
-.module-list li { font-size: .79rem; color: var(--cocoa-mid); padding-left: .9rem; position: relative; font-weight: 300; line-height: 1.5; }
-.module-list li::before { content: "—"; position: absolute; left: 0; color: var(--cocoa-mute); font-size: .67rem; top: .1em; }
-.product-footer { margin-top: auto; display: flex; flex-direction: column; gap: .5rem; }
-.soon-badge { display: inline-block; font-family: var(--ff-m); font-size: .61rem; letter-spacing: .1em; text-transform: uppercase; padding: .26rem .68rem; border-radius: 100px; background: rgba(90,61,34,.05); color: var(--cocoa-mute); border: 1px solid var(--border-lt); }
-.notify-link { font-family: var(--ff-m); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); text-decoration: none; cursor: pointer; background: none; border: none; transition: color .2s; }
-.notify-link:hover { color: var(--gold-lt); }
-.mini-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1.5rem; }
-.mini-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; }
-.mini-ico { font-size: 1.5rem; margin-bottom: .65rem; }
-.mini-name { font-family: var(--ff-h); font-size: .83rem; font-weight: 600; color: var(--cocoa); margin-bottom: .22rem; }
-.mini-p { font-size: .77rem; color: var(--cocoa-mute); line-height: 1.5; font-weight: 300; }
-.mini-price { font-family: var(--ff-m); font-size: .7rem; color: var(--gold); margin-top: .65rem; }
-.ed-table { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; max-width: 680px; }
-.ed-hd { padding: 1.75rem; border-bottom: 1px solid var(--border-lt); }
-.ed-tiers { display: grid; grid-template-columns: repeat(4,1fr); }
-.ed-tier { padding: 1.5rem 1rem; text-align: center; border-right: 1px solid var(--border-lt); }
-.ed-tier:last-child { border-right: none; }
-.ed-lbl { font-family: var(--ff-m); font-size: .61rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .4rem; }
-.ed-price { font-family: var(--ff-d); font-size: 2rem; font-weight: 500; color: var(--cocoa); }
-
-/* Vanda corporate products */
-.vanda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 760px; }
-.vanda-card { background: var(--cream-card); border: 1px solid var(--border-lt); border-radius: var(--rlg); padding: 1.5rem; display: flex; flex-direction: column; }
-.vanda-step { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .45rem; }
-.vanda-name { font-family: var(--ff-d); font-size: 1.25rem; font-weight: 500; color: var(--cocoa); margin-bottom: .45rem; }
-.vanda-p { font-size: .81rem; color: var(--cocoa-mute); line-height: 1.55; font-weight: 300; flex: 1; margin-bottom: .75rem; }
-.vanda-price { font-family: var(--ff-m); font-size: .7rem; color: var(--gold); margin-bottom: .75rem; }
-.vanda-contact { font-family: var(--ff-m); font-size: .63rem; letter-spacing: .06em; color: var(--gold); text-decoration: none; }
-.vanda-contact:hover { color: var(--gold-lt); }
-#vanda-inquiry-form select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9971F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem !important; }
-
-/* ── WHO WE ARE PAGE ── */
-.about-hero { background: var(--cocoa); padding: calc(64px + 5rem) clamp(1.5rem,5vw,4rem) 6rem; }
-.mission-q { font-family: var(--ff-d); font-size: clamp(1.75rem,3.5vw,2.75rem); font-weight: 500; font-style: italic; color: var(--txt-lt); line-height: 1.35; border-left: 3px solid var(--gold); padding-left: 2rem; max-width: 680px; margin-bottom: 1.5rem; }
-.mission-p { font-size: .96rem; color: rgba(250,244,225,.6); line-height: 1.7; font-weight: 300; max-width: 580px; margin-bottom: 1rem; }
-.lane-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-lt); border: 1px solid var(--border-lt); border-radius: var(--rlg); overflow: hidden; max-width: 860px; }
-.lane-half { background: var(--cream-card); padding: 2rem; }
-.lane-half-lbl { font-family: var(--ff-m); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cocoa-mute); margin-bottom: .6rem; }
-.lane-half-name { font-family: var(--ff-d); font-size: 1.35rem; font-weight: 500; color: var(--cocoa); margin-bottom: 1rem; }
-.lane-items { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-.lane-items li { font-size: .84rem; color: var(--cocoa-mid); display: flex; gap: .6rem; font-weight: 300; }
-.lane-items li::before { content: "→"; color: var(--gold); font-size: .74rem; flex-shrink: 0; margin-top: .15em; }
-.bio-init { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--ff-d); font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
-.bio-init.rn { background: linear-gradient(135deg,var(--gold),var(--rose)); color: var(--cocoa); }
-.bio-init.vc { background: linear-gradient(135deg,var(--sage),var(--gold)); color: var(--cocoa); }
-.bio-name { font-family: var(--ff-d); font-size: 1.75rem; font-weight: 500; color: var(--cocoa); margin-bottom: .15rem; }
-.bio-role { font-family: var(--ff-m); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; display: block; }
-.bio-p { font-size: .92rem; color: var(--cocoa-mid); line-height: 1.7; font-weight: 300; margin-bottom: .85rem; }
-.cred-list { list-style: none; display: flex; flex-direction: column; gap: .28rem; margin-top: .9rem; }
-.cred-list li { font-size: .79rem; color: var(--cocoa-mute); padding-left: .9rem; position: relative; font-weight: 300; }
-.cred-list li::before { content: "·"; position: absolute; left: 0; color: var(--gold); }
-
-/* ── FOOTER ── */
-.footer { background: var(--cocoa); padding: 3rem clamp(1.5rem,5vw,4rem) 2rem; border-top: 1px solid rgba(201,151,31,.1); }
-.footer-in { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
-.footer-logo { font-family: var(--ff-d); font-size: 1.2rem; font-style: italic; color: var(--gold-lt); margin-bottom: .6rem; }
-.footer-tag { font-size: .82rem; color: rgba(250,244,225,.38); line-height: 1.6; font-weight: 300; max-width: 260px; }
-.footer-col-h { font-family: var(--ff-h); font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,244,225,.32); margin-bottom: 1rem; }
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
-.footer-links a { font-size: .82rem; color: rgba(250,244,225,.48); text-decoration: none; cursor: pointer; transition: color .2s; font-weight: 300; }
-.footer-links a:hover { color: var(--gold-lt); }
-.footer-bot { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.05); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.footer-legal { font-family: var(--ff-m); font-size: .61rem; letter-spacing: .06em; color: rgba(250,244,225,.24); }
-
-/* ── RESPONSIVE ── */
-@media (max-width:900px) {
-  .hero-in { grid-template-columns: 1fr; gap: 2.5rem; }
-  .stat-ring { flex-direction: row; flex-wrap: wrap; }
-  .stat-card { flex: 1; min-width: 130px; }
-  .cards-grid, .lane-grid, .product-ladder, .tiers-grid { grid-template-columns: 1fr; }
-  .rotating-grid, .mini-grid { grid-template-columns: 1fr 1fr; }
-  .aud-grid { grid-template-columns: 1fr 1fr; }
-  .footer-in { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .roadmap-pair { grid-template-columns: 1fr !important; }
-  .section-list-grid { grid-template-columns: 1fr; }
-  .lane-split { grid-template-columns: 1fr; }
-  .vanda-grid { grid-template-columns: 1fr; }
-  .nav-links, .nav-cta { display: none; }
-  #contact-form > div:first-child { grid-template-columns: 1fr; }
-  .hamburger { display: flex; }
-  .dark-clip { clip-path: none; }
-}
-@media (max-width:600px) {
-  .rotating-grid, .mini-grid, .aud-grid, .ed-tiers { grid-template-columns: 1fr; }
-  .ed-tier { border-right: none; border-bottom: 1px solid var(--border-lt); }
-  .lane-half { border-right: none; border-bottom: 1px solid var(--border-lt); }
-  #vanda-inquiry-form > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
-  .contact-direct-grid { grid-template-columns: 1fr 1fr !important; }
-}
-@media (max-width:400px) {
-  .contact-direct-grid { grid-template-columns: 1fr !important; }
-}
-</style>
+<link rel="stylesheet" href="/index.css">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 <meta name="robots" content="index, follow"/>
 
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://rn-selected-work.vercel.app/#rn-collins", "name": "RN Collins", "jobTitle": "AI Educator & Consultant", "url": "https://rn-selected-work.vercel.app", "sameAs": ["https://linkedin.com/in/rn-collins"]}, {"@type": "WebPage", "name": "Aiapc Site \u2014 RN Collins", "url": "https://aiapc-site.vercel.app", "author": {"@id": "https://rn-selected-work.vercel.app/#rn-collins"}}]}</script>
-</head>
+<script type="application/ld+json" src="/schema.json"></script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"></head>
 <body>
+<a class="skip-link" href="#site-content">Skip to main content</a>
 
 <!-- ════════ NAV ════════ -->
-<nav class="nav">
-  <button class="nav-logo" onclick="showPage('home')">AI is a Piece of Cake <span style="font-style:normal;font-family:var(--ff-h);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,244,225,.38);margin-left:.4rem;vertical-align:middle">AIAPC</span></button>
+<nav class="nav" aria-label="Primary navigation">
+  <a class="nav-logo" href="#home" data-action="action-1">AI is a Piece of Cake <span class="csp-index-1">AIAPC</span></a>
   <ul class="nav-links">
-    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
-    <li><a onclick="showPage('newsletter')" id="nav-newsletter">Newsletter</a></li>
-    <li><a onclick="showPage('products')" id="nav-products">Products</a></li>
-    <li><a onclick="showPage('who')" id="nav-who">Who We Are</a></li>
-    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    <li><a href="#home" data-action="action-3" id="nav-home" class="active">Home</a></li>
+    <li><a href="#newsletter" data-action="action-5" id="nav-newsletter">Newsletter</a></li>
+    <li><a href="#products" data-action="action-7" id="nav-products">Products</a></li>
+    <li><a href="#who" data-action="action-9" id="nav-who">Who We Are</a></li>
+    <li><a href="#contact" data-action="action-11" id="nav-contact">Contact</a></li>
   </ul>
-  <button class="nav-cta" onclick="goSubscribe()">Get Notified →</button>
-  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
+  <button class="nav-cta" data-action="action-13">Get Notified →</button>
+  <button class="hamburger" id="hamburger" data-action="action-15" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="mobile-nav" id="mobileNav" aria-hidden="true">
-  <a onclick="showPage('home');toggleMobile()">Home</a>
-  <a onclick="showPage('newsletter');toggleMobile()">Newsletter</a>
-  <a onclick="showPage('products');toggleMobile()">Products</a>
-  <a onclick="showPage('who');toggleMobile()">Who We Are</a>
-  <a onclick="showPage('contact');toggleMobile()">Contact</a>
-  <a onclick="goSubscribe();toggleMobile()">Get Notified →</a>
+<div class="mobile-nav" id="mobileNav" aria-hidden="true" aria-label="Mobile navigation">
+  <a href="#home" data-action="action-17">Home</a>
+  <a href="#newsletter" data-action="action-19">Newsletter</a>
+  <a href="#products" data-action="action-21">Products</a>
+  <a href="#who" data-action="action-23">Who We Are</a>
+  <a href="#contact" data-action="action-25">Contact</a>
+  <a href="#contact" data-action="action-27">Get Notified →</a>
 </div>
 
 
-<main id="site-content">
+<main id="site-content" tabindex="-1">
 <!-- ═══════════════════════════════════════════ -->
 <!-- HOME PAGE                                   -->
 <!-- ═══════════════════════════════════════════ -->
@@ -379,9 +94,9 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
           ══════════════════════════════════════════════════
         -->
         <div class="hero-subscribe-state">
-          <div class="badge" style="margin-bottom:1rem"><span class="badge-dot"></span>Targeting November 2026</div>
-          <p style="font-family:var(--ff-m);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,244,225,.45);margin-bottom:1.25rem">Get in touch early to be first in line.</p>
-          <a class="btn btn-ghost" onclick="showPage('contact')">Get in Touch Early →</a>
+          <div class="badge csp-index-2"><span class="badge-dot"></span>Targeting November 2026</div>
+          <p class="csp-index-3">Get in touch early to be first in line.</p>
+          <a class="btn btn-ghost" data-action="action-29">Get in Touch Early →</a>
         </div>
         <!-- END BEEHIIV HERO EMBED -->
       </div>
@@ -396,7 +111,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   </section>
 
   <!-- WHAT'S INSIDE -->
-  <section class="sec" style="background:var(--cream)">
+  <section class="sec csp-index-4">
     <div class="sec-in">
       <div class="sec-label">Every Issue</div>
       <h2 class="sec-h">Four planned sections.<br>Targeting Thursdays.</h2>
@@ -432,9 +147,9 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
       </div>
 
       <!-- ROTATING SECTIONS -->
-      <div style="margin-top:2.5rem">
-        <div class="sec-label sec-label-mute" style="margin-bottom:.5rem">Also in the mix</div>
-        <p style="font-size:.88rem;color:var(--cocoa-mute);margin-bottom:1.25rem;font-weight:300">Three additional sections that rotate in — starting when we launch.</p>
+      <div class="csp-index-5">
+        <div class="sec-label sec-label-mute csp-index-6">Also in the mix</div>
+        <p class="csp-index-7">Three additional sections that rotate in — starting when we launch.</p>
         <div class="rotating-grid">
           <div class="rot-card">
             <span class="rot-badge">Every other issue</span>
@@ -465,9 +180,9 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   <!-- WHO WE ARE TEASER -->
   <section class="dark-clip">
     <div class="sec-in">
-      <div class="sec-label" style="color:rgba(201,151,31,.65)">The People</div>
+      <div class="sec-label csp-index-8">The People</div>
       <h2 class="sec-h sec-h-lt">Co-created by two people<br>who actually use this stuff.</h2>
-      <p class="sec-p sec-p-lt" style="margin-bottom:2rem">A neuroscientist in law school and an institutional program director. Neither of us came from Silicon Valley. That's the point.</p>
+      <p class="sec-p sec-p-lt csp-index-9">A neuroscientist in law school and an institutional program director. Neither of us came from Silicon Valley. That's the point.</p>
       <div class="lane-grid">
         <div class="lane-card">
           <div class="lane-init rn">RN</div>
@@ -493,11 +208,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             Replace href="#" with Vanda's professional site, LinkedIn, or contact page.
             Options: LinkedIn URL · personal site · email link
           -->
-          <div class="brand-links" style="opacity:.45;font-family:var(--ff-m);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,244,225,.55);margin-top:1.1rem">Link coming soon</div>
+          <div class="brand-links csp-index-10">Link coming soon</div>
         </div>
       </div>
-      <div style="margin-top:2rem">
-        <button class="btn btn-outline-gold" onclick="showPage('who')">Full bios →</button>
+      <div class="csp-index-11">
+        <button class="btn btn-outline-gold" data-action="action-31">Full bios →</button>
       </div>
     </div>
   </section>
@@ -516,8 +231,8 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
         Beehiiv → Settings → Forms → Embed
       -->
       <!-- BEEHIIV EMBED: paste your embed code here at launch -->
-      <div style="text-align:center;padding:2rem 1rem">
-        <p style="font-size:.88rem;color:var(--cocoa-mute);font-weight:300;line-height:1.65">Subscription opens when the first issue is ready. <a onclick="showPage('contact')" style="color:var(--gold);cursor:pointer;text-decoration:none">Get in touch early →</a></p>
+      <div class="csp-index-12">
+        <p class="csp-index-13">Subscription opens when the first issue is ready. <a data-action="action-33" class="csp-index-14">Get in touch early →</a></p>
       </div>
       <!-- END BEEHIIV EMBED -->
     </div>
@@ -534,20 +249,20 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
 
   <section class="page-hero">
     <div class="page-hero-in">
-      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">The Newsletter</div>
-      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4.5rem)">Planned free edition.<br><em>Targeting Thursdays.</em></h1>
-      <p class="hero-sub" style="max-width:500px">The newsletter is planned to remain free. Every section. Paid doesn't unlock articles — it unlocks the archive and the tools.</p>
-      <button class="btn btn-gold" onclick="document.getElementById('nl-subscribe').scrollIntoView({behavior:'smooth'})">Get Notified at Launch →</button>
+      <div class="sec-label csp-index-15">The Newsletter</div>
+      <h1 class="hero-h csp-index-16">Planned free edition.<br><em>Targeting Thursdays.</em></h1>
+      <p class="hero-sub csp-index-17">The newsletter is planned to remain free. Every section. Paid doesn't unlock articles — it unlocks the archive and the tools.</p>
+      <button class="btn btn-gold" data-action="action-35">Get Notified at Launch →</button>
     </div>
   </section>
 
   <!-- SECTION BREAKDOWN -->
-  <section class="sec" style="background:var(--cream)">
+  <section class="sec csp-index-18">
     <div class="sec-in">
       <div class="sec-label">What's Inside</div>
       <h2 class="sec-h">Seven sections.<br>Two exist nowhere else.</h2>
-      <p style="font-size:.82rem;color:var(--cocoa-mute);font-weight:300;max-width:640px;margin-bottom:1rem">The Case and The Line. The Case applies M&amp;M conference failure analysis to AI. The Line presents genuine ethics edge cases without resolving them. They are designed to support practical, source-conscious learning.</p>
-      <p class="sec-p" style="max-width:640px">Four guaranteed every issue. Three more that rotate in monthly or biweekly.</p>
+      <p class="csp-index-19">The Case and The Line. The Case applies M&amp;M conference failure analysis to AI. The Line presents genuine ethics edge cases without resolving them. They are designed to support practical, source-conscious learning.</p>
+      <p class="sec-p csp-index-20">Four guaranteed every issue. Three more that rotate in monthly or biweekly.</p>
 
       <div class="section-list-grid">
         <div class="sec-list-card">
@@ -583,21 +298,21 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             <span class="sec-list-ico">🏗️</span>
             <div><div class="sec-list-name">The Build</div><div class="sec-list-desc">Behind a real AI system I built</div><div class="sec-list-freq">Quarterly · 400–600 words</div></div>
           </div>
-          <div style="margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--border-lt)">
-            <div style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.35rem">Conditional</div>
-            <div style="font-size:.75rem;color:var(--cocoa-mute);font-weight:300">Byline when an article publishes at Fat Nugs Magazine, Cannabis Law Report, or the Journal of Biophilic Design</div>
+          <div class="csp-index-21">
+            <div class="csp-index-22">Conditional</div>
+            <div class="csp-index-23">Byline when an article publishes at Fat Nugs Magazine, Cannabis Law Report, or the Journal of Biophilic Design</div>
           </div>
         </div>
       </div>
 
       <div class="diff-box">
-        <div class="sec-label" style="margin-bottom:.5rem">What makes this different</div>
-        <p style="font-size:.9rem;color:var(--cocoa-mid);line-height:1.65;font-weight:300">The Case is written in the M&amp;M conference tradition — the morbidity and mortality review model medicine uses to analyze failures without assigning blame. Not a callout. A mechanism. The Line presents genuine AI ethics edge cases without resolving them, the way a law school hypothetical does. The Ask answers specific professional questions publicly — the kind professionals are already asking in private. These sections are designed for risk-averse, credential-bearing professionals who learn from precedent and edge cases, not from optimism.</p>
+        <div class="sec-label csp-index-24">What makes this different</div>
+        <p class="csp-index-25">The Case is written in the M&amp;M conference tradition — the morbidity and mortality review model medicine uses to analyze failures without assigning blame. Not a callout. A mechanism. The Line presents genuine AI ethics edge cases without resolving them, the way a law school hypothetical does. The Ask answers specific professional questions publicly — the kind professionals are already asking in private. These sections are designed for risk-averse, credential-bearing professionals who learn from precedent and edge cases, not from optimism.</p>
       </div>
 
       <!-- TIERS -->
       <div class="sec-label">Free vs. Paid</div>
-      <h2 class="sec-h" style="font-size:2rem;margin-bottom:.75rem">The planned public newsletter will be free.</h2>
+      <h2 class="sec-h csp-index-26">The planned public newsletter will be free.</h2>
       <p class="sec-p">The planned paid tier adds archive and tool libraries. Neither tier is open for subscription yet.</p>
       <div class="tiers-grid">
         <div class="tier-card">
@@ -645,16 +360,16 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   </section>
 
   <!-- AUDIENCE -->
-  <section class="sec" style="background:var(--cream-mid)">
+  <section class="sec csp-index-27">
     <div class="sec-in">
       <div class="sec-label">The Audience</div>
       <h2 class="sec-h">Who this is for</h2>
       <p class="sec-p">Credentialed professionals whose fields are being reshaped by AI — with no clear on-ramp and no one explaining it in their register.</p>
       <div class="aud-grid">
-        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">⚖️</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Lawyers</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">Partners, counsel, and associates at firms where AI is arriving but nobody is explaining it in a legal register.</p></div>
-        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">🏥</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Physicians</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">Clinicians and health administrators watching AI enter patient care without clinical-grade explainers.</p></div>
-        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">📊</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Executives</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">C-suite and senior leaders who need to speak credibly about AI to boards, clients, and regulators.</p></div>
-        <div class="aud-card"><div style="font-size:1.75rem;margin-bottom:.65rem">🎓</div><div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Educators</div><p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300">Teachers, professors, and curriculum designers being asked to have an AI policy before anyone has given them AI literacy.</p></div>
+        <div class="aud-card"><div class="csp-index-28">⚖️</div><div class="csp-index-29">Lawyers</div><p class="csp-index-30">Partners, counsel, and associates at firms where AI is arriving but nobody is explaining it in a legal register.</p></div>
+        <div class="aud-card"><div class="csp-index-31">🏥</div><div class="csp-index-32">Physicians</div><p class="csp-index-33">Clinicians and health administrators watching AI enter patient care without clinical-grade explainers.</p></div>
+        <div class="aud-card"><div class="csp-index-34">📊</div><div class="csp-index-35">Executives</div><p class="csp-index-36">C-suite and senior leaders who need to speak credibly about AI to boards, clients, and regulators.</p></div>
+        <div class="aud-card"><div class="csp-index-37">🎓</div><div class="csp-index-38">Educators</div><p class="csp-index-39">Teachers, professors, and curriculum designers being asked to have an AI policy before anyone has given them AI literacy.</p></div>
       </div>
     </div>
   </section>
@@ -671,10 +386,10 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
         aiisapieceofcake.beehiiv.com → Settings → Forms → Embed
       -->
       <!-- BEEHIIV EMBED: paste your embed code here at launch -->
-      <div style="text-align:center;padding:2rem 1rem">
-        <p style="font-family:var(--ff-d);font-size:1.2rem;font-weight:500;color:var(--cocoa-mid);line-height:1.4;margin-bottom:.75rem">Targeting November 2026.</p>
-        <p style="font-size:.84rem;color:var(--cocoa-mute);font-weight:300;line-height:1.6;margin-bottom:1.25rem">The subscribe form opens when the newsletter is live.</p>
-        <button class="btn btn-outline-gold" onclick="showPage('contact')">Get in touch early →</button>
+      <div class="csp-index-40">
+        <p class="csp-index-41">Targeting November 2026.</p>
+        <p class="csp-index-42">The subscribe form opens when the newsletter is live.</p>
+        <button class="btn btn-outline-gold" data-action="action-37">Get in touch early →</button>
       </div>
       <!-- END BEEHIIV EMBED -->
     </div>
@@ -690,28 +405,28 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
 <div id="page-products" class="page">
 
   <section class="page-hero">
-    <div class="page-hero-in" style="text-align:center;max-width:720px;margin:0 auto">
-      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">Products &amp; Services</div>
-      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4rem)">The learning ladder</h1>
-      <p class="hero-sub" style="text-align:center;margin:0 auto 2rem;max-width:460px"><a onclick="showPage('newsletter')" style="color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px">The newsletter</a> builds the mental model. The planned products go further—courses, guides, and teaching editions designed for professional contexts. No checkout or enrollment is open.</p>
+    <div class="page-hero-in csp-index-43">
+      <div class="sec-label csp-index-44">Products &amp; Services</div>
+      <h1 class="hero-h csp-index-45">The learning ladder</h1>
+      <p class="hero-sub csp-index-46"><a data-action="action-39" class="csp-index-47">The newsletter</a> builds the mental model. The planned products go further—courses, guides, and teaching editions designed for professional contexts. No checkout or enrollment is open.</p>
       <div class="badge"><span class="badge-dot"></span>Prelaunch roadmap · proposed November 2026 release sequence</div>
     </div>
   </section>
 
   <!-- THREE COURSES -->
-  <section class="sec" style="background:var(--cream)">
+  <section class="sec csp-index-48">
     <div class="sec-in">
       <div class="sec-label">The Course Ladder</div>
       <h2 class="sec-h">Three courses.<br>One layer at a time.</h2>
 
       <div class="persuasion-intro">
-        <p style="font-family:var(--ff-d);font-size:1.25rem;font-weight:500;color:var(--txt-lt);line-height:1.4;margin-bottom:.75rem">Most AI courses teach tools. This ladder teaches the mental model first.</p>
-        <p style="font-size:.88rem;color:rgba(250,244,225,.6);line-height:1.65;font-weight:300">Course 1 explains what AI actually is — before you touch any tool. Without that foundation, every tool feels mysterious and every output feels random. Course 2 teaches you to get dramatically better results from whatever tools you're already using. Course 3 brings it into your specific professional context. The ladder works because each course earns the next.</p>
-        <p style="font-size:.82rem;color:rgba(250,244,225,.42);line-height:1.65;font-weight:300;margin-top:.75rem">Already reading <a onclick="showPage('newsletter')" style="color:rgba(250,244,225,.7);cursor:pointer;text-decoration:underline;text-underline-offset:2px">the newsletter</a>? These products go deeper.</p>
+        <p class="csp-index-49">Most AI courses teach tools. This ladder teaches the mental model first.</p>
+        <p class="csp-index-50">Course 1 explains what AI actually is — before you touch any tool. Without that foundation, every tool feels mysterious and every output feels random. Course 2 teaches you to get dramatically better results from whatever tools you're already using. Course 3 brings it into your specific professional context. The ladder works because each course earns the next.</p>
+        <p class="csp-index-51">Already reading <a data-action="action-41" class="csp-index-52">the newsletter</a>? These products go deeper.</p>
       </div>
 
       <div class="product-ladder">
-        <div class="product-card" style="border-top:3px solid var(--gold)">
+        <div class="product-card csp-index-53">
           <div class="product-hd">
             <div class="product-step">Course 1 · The Foundation</div>
             <div class="product-name">What Is AI, Actually?</div>
@@ -729,11 +444,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             </ul>
             <div class="product-footer">
               <span class="soon-badge">Coming Nov 2026</span>
-              <button class="notify-link" onclick="goSubscribe()">Notify me when this launches →</button>
+              <button class="notify-link" data-action="action-43">Notify me when this launches →</button>
             </div>
           </div>
         </div>
-        <div class="product-card" style="border-top:3px solid var(--rose)">
+        <div class="product-card csp-index-54">
           <div class="product-hd">
             <div class="product-step">Course 2 · The Skill</div>
             <div class="product-name">Prompting That Actually Works</div>
@@ -752,11 +467,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             </ul>
             <div class="product-footer">
               <span class="soon-badge">After Course 1 launches</span>
-              <button class="notify-link" onclick="goSubscribe()">Notify me →</button>
+              <button class="notify-link" data-action="action-45">Notify me →</button>
             </div>
           </div>
         </div>
-        <div class="product-card" style="border-top:3px solid var(--sage)">
+        <div class="product-card csp-index-55">
           <div class="product-hd">
             <div class="product-step">Course 3 · The Application</div>
             <div class="product-name">AI for Your Actual Job</div>
@@ -774,7 +489,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             </ul>
             <div class="product-footer">
               <span class="soon-badge">After Course 2 launches</span>
-              <button class="notify-link" onclick="goSubscribe()">Notify me →</button>
+              <button class="notify-link" data-action="action-47">Notify me →</button>
             </div>
           </div>
         </div>
@@ -783,11 +498,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   </section>
 
   <!-- TOOL MINI-GUIDES -->
-  <section class="sec" style="background:var(--cream-mid)">
+  <section class="sec csp-index-56">
     <div class="sec-in">
       <div class="sec-label">Digital Guides</div>
       <h2 class="sec-h">Tool Mini-Guides</h2>
-      <p class="sec-p" style="margin-bottom:0">Planned digital-guide catalog. Prices are prelaunch planning figures; no guide is currently for sale or downloadable. Each proposed guide extends a Tool Tasting issue into step-by-step professional guidance.</p>
+      <p class="sec-p csp-index-57">Planned digital-guide catalog. Prices are prelaunch planning figures; no guide is currently for sale or downloadable. Each proposed guide extends a Tool Tasting issue into step-by-step professional guidance.</p>
       <div class="mini-grid">
         <div class="mini-card"><div class="mini-ico">🤖</div><div class="mini-name">Getting the Most Out of Claude</div><p class="mini-p">Written by someone who uses Claude daily in regulated professional contexts. What Claude does better than other AI tools for professional work, 3 prompt structures that consistently outperform generic approaches, and 10 ready-to-use prompts for legal research, educational planning, and client communication.</p><div class="mini-price">$12 · PDF</div></div>
         <div class="mini-card"><div class="mini-ico">⚖️</div><div class="mini-name">ChatGPT for Lawyers</div><p class="mini-p">6 legal tasks where ChatGPT earns its place, 4 where it creates liability risk, and what ABA Formal Opinion 512 actually requires under Rules 1.1 and 5.3. Prompt templates for case prep, memo drafting, and contract review — each marked where attorney review is legally required before use.</p><div class="mini-price">$22 · PDF</div></div>
@@ -796,30 +511,30 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
         <div class="mini-card"><div class="mini-ico">🏛️</div><div class="mini-name">Harvey for Legal Teams</div><p class="mini-p">What Harvey actually does vs. what firms expect, implementation checklist, what to test before rollout. For legal ops and managing partners.</p><div class="mini-price">$22 · PDF</div></div>
         <div class="mini-card"><div class="mini-ico">🏥</div><div class="mini-name">Gemini for Healthcare</div><p class="mini-p">Gemini's specific advantages for healthcare professionals and where its health-context training helps vs. where it doesn't. What to know before using any AI with patient-adjacent data — HIPAA considerations, data retention risks, and what BAAs actually cover. Prompt frameworks for medical documentation and patient communication, written with clinical research experience in the background.</p><div class="mini-price">$12 · PDF</div></div>
       </div>
-      <p style="font-family:var(--ff-m);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cocoa-mute);margin-top:1.5rem">All guides launching November 2026 ·
-        <button class="notify-link" onclick="goSubscribe()">Get notified at launch →</button>
+      <p class="csp-index-58">All guides launching November 2026 ·
+        <button class="notify-link" data-action="action-49">Get notified at launch →</button>
       </p>
     </div>
   </section>
 
   <!-- ROADMAP: 5 NEW PRODUCTS -->
-  <section class="sec" style="background:var(--cocoa);color:var(--cream)">
+  <section class="sec csp-index-59">
     <div class="sec-in">
-      <div class="sec-label" style="color:var(--gold)">On the Roadmap</div>
-      <h2 class="sec-h" style="color:var(--cream)">Five more.<br>Already scoped.</h2>
-      <p class="sec-p" style="color:rgba(250,244,225,.7);margin-bottom:2.5rem">Prelaunch roadmap around the proposed weekly issue. Gumroad, bundle fulfillment, and paid delivery are not active.</p>
+      <div class="sec-label csp-index-60">On the Roadmap</div>
+      <h2 class="sec-h csp-index-61">Five more.<br>Already scoped.</h2>
+      <p class="sec-p csp-index-62">Prelaunch roadmap around the proposed weekly issue. Gumroad, bundle fulfillment, and paid delivery are not active.</p>
 
       <div class="product-ladder">
 
-        <div class="product-card" style="border-top:3px solid var(--gold);background:rgba(250,244,225,.04);border-color:rgba(250,244,225,.08)">
+        <div class="product-card csp-index-63">
           <div class="product-hd">
-            <div class="product-step" style="color:var(--gold-lt)">Annual flagship</div>
-            <div class="product-name" style="color:var(--cream)">The Address: State of AI for Professionals</div>
-            <div class="product-tag" style="color:rgba(250,244,225,.55)">First edition: Thursday, January 7, 2027</div>
+            <div class="product-step csp-index-64">Annual flagship</div>
+            <div class="product-name csp-index-65">The Address: State of AI for Professionals</div>
+            <div class="product-tag csp-index-66">First edition: Thursday, January 7, 2027</div>
           </div>
           <div class="product-bd">
-            <div class="product-price" style="color:var(--gold-lt)">$47</div>
-            <ul class="module-list" style="color:rgba(250,244,225,.78)">
+            <div class="product-price csp-index-67">$47</div>
+            <ul class="module-list csp-index-68">
               <li>30 to 40 pages, profession-specific cuts for legal, medical, education, and executive</li>
               <li>Honest accounting of last year's predictions against what actually happened</li>
               <li>Ten predictions for the coming year, with the reasoning shown</li>
@@ -828,20 +543,20 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             </ul>
             <div class="product-footer">
               <span class="soon-badge">January 2027</span>
-              <button class="notify-link" onclick="goSubscribe()">Notify me &rarr;</button>
+              <button class="notify-link" data-action="action-51">Notify me &rarr;</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card" style="border-top:3px solid var(--sage);background:rgba(250,244,225,.04);border-color:rgba(250,244,225,.08)">
+        <div class="product-card csp-index-69">
           <div class="product-hd">
-            <div class="product-step" style="color:var(--gold-lt)">Free diagnostic</div>
-            <div class="product-name" style="color:var(--cream)">AI Readiness Scorecard</div>
-            <div class="product-tag" style="color:rgba(250,244,225,.55)">Twenty questions, profession-tagged, free</div>
+            <div class="product-step csp-index-70">Free diagnostic</div>
+            <div class="product-name csp-index-71">AI Readiness Scorecard</div>
+            <div class="product-tag csp-index-72">Twenty questions, profession-tagged, free</div>
           </div>
           <div class="product-bd">
-            <div class="product-price" style="color:var(--gold-lt)">Free</div>
-            <ul class="module-list" style="color:rgba(250,244,225,.78)">
+            <div class="product-price csp-index-73">Free</div>
+            <ul class="module-list csp-index-74">
               <li>Twenty diagnostic questions across Use, Verification, and Compliance</li>
               <li>A personalized one-page report by email</li>
               <li>Calibrated for legal, medical, education, executive, and other professional contexts</li>
@@ -850,20 +565,20 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             </ul>
             <div class="product-footer">
               <span class="soon-badge">October 2026</span>
-              <button class="notify-link" onclick="goSubscribe()">Notify me &rarr;</button>
+              <button class="notify-link" data-action="action-53">Notify me &rarr;</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card" style="border-top:3px solid var(--rose);background:rgba(250,244,225,.04);border-color:rgba(250,244,225,.08)">
+        <div class="product-card csp-index-75">
           <div class="product-hd">
-            <div class="product-step" style="color:var(--gold-lt)">Standalone vault</div>
-            <div class="product-name" style="color:var(--cream)">Skills.md Pack</div>
-            <div class="product-tag" style="color:rgba(250,244,225,.55)">Twelve reusable Claude Skills in markdown</div>
+            <div class="product-step csp-index-76">Standalone vault</div>
+            <div class="product-name csp-index-77">Skills.md Pack</div>
+            <div class="product-tag csp-index-78">Twelve reusable Claude Skills in markdown</div>
           </div>
           <div class="product-bd">
-            <div class="product-price" style="color:var(--gold-lt)">$47</div>
-            <ul class="module-list" style="color:rgba(250,244,225,.78)">
+            <div class="product-price csp-index-79">$47</div>
+            <ul class="module-list csp-index-80">
               <li>Legal Memo, Patient Letter, Lesson Plan, Board Brief, Client Communication</li>
               <li>Research Synthesis, Discovery Review, Clinical Note, IRB Protocol</li>
               <li>Course Syllabus, Press Release, Investor Update</li>
@@ -872,7 +587,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             </ul>
             <div class="product-footer">
               <span class="soon-badge">November 2026</span>
-              <button class="notify-link" onclick="goSubscribe()">Notify me &rarr;</button>
+              <button class="notify-link" data-action="action-55">Notify me &rarr;</button>
             </div>
           </div>
         </div>
@@ -880,69 +595,69 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
       </div>
 
       <!-- Annual Bundle (full-width feature card linking to /bundle) -->
-      <div style="background:rgba(201,151,31,.08);border:1px solid rgba(201,151,31,.25);border-radius:var(--rlg);padding:2.25rem;margin-top:2rem">
-        <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Annual bundle &middot; individual</div>
-        <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.5rem">The Annual Bundle</div>
-        <div class="product-tag" style="color:rgba(250,244,225,.55);margin-bottom:1rem">Every paid product AIAPC publishes in your twelve-month window. Paid newsletter, Skills Packs, Decision Cards, Prompt Packs, mini-guides, workbooks, template suites, The Address, AI Policy Implementation Kit.</div>
-        <div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap">
-          <div class="product-price" style="color:var(--gold-lt);font-size:1.6rem">$297 / year</div>
-          <div style="color:rgba(250,244,225,.5);font-size:.85rem;font-style:italic">about $0.81 per day &middot; roughly 71% off &agrave; la carte</div>
+      <div class="csp-index-81">
+        <div class="product-step csp-index-82">Annual bundle &middot; individual</div>
+        <div class="product-name csp-index-83">The Annual Bundle</div>
+        <div class="product-tag csp-index-84">Every paid product AIAPC publishes in your twelve-month window. Paid newsletter, Skills Packs, Decision Cards, Prompt Packs, mini-guides, workbooks, template suites, The Address, AI Policy Implementation Kit.</div>
+        <div class="csp-index-85">
+          <div class="product-price csp-index-86">$297 / year</div>
+          <div class="csp-index-87">about $0.81 per day &middot; roughly 71% off &agrave; la carte</div>
         </div>
-        <p style="font-size:.88rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.6;margin-bottom:1.25rem">Full math, complete product list, and FAQ on the dedicated bundle page. Thirty-day refund. Renewal locked at $237 for year two.</p>
-        <a href="/bundle" style="display:inline-block;padding:.85rem 1.75rem;background:var(--gold);color:var(--cocoa);font-family:var(--ff-h);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s">See the bundle &rarr;</a>
+        <p class="csp-index-88">Full math, complete product list, and FAQ on the dedicated bundle page. Thirty-day refund. Renewal locked at $237 for year two.</p>
+        <a href="/bundle" class="csp-index-89">See the bundle &rarr;</a>
       </div>
 
       <!-- Team & Institutional License (expanded three-tier section) -->
-      <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(250,244,225,.12)">
-        <div class="product-step" style="color:var(--gold-lt);margin-bottom:.5rem">Firm &middot; school &middot; hospital</div>
-        <div class="product-name" style="color:var(--cream);margin-bottom:.5rem;font-size:1.5rem">Team &amp; Institutional License</div>
-        <p style="font-size:.95rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.6;margin-bottom:1.75rem;max-width:680px">Same baseline AI literacy across your team. Three tiers, each including everything in the lower tiers plus its named additions. Full standard terms in the License Terms PDF below.</p>
+      <div class="csp-index-90">
+        <div class="product-step csp-index-91">Firm &middot; school &middot; hospital</div>
+        <div class="product-name csp-index-92">Team &amp; Institutional License</div>
+        <p class="csp-index-93">Same baseline AI literacy across your team. Three tiers, each including everything in the lower tiers plus its named additions. Full standard terms in the License Terms PDF below.</p>
 
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.75rem" class="roadmap-pair">
+        <div class="csp-index-94" class="roadmap-pair">
 
-          <div style="background:rgba(82,112,85,.10);border:1px solid rgba(82,112,85,.30);border-radius:var(--rlg);padding:1.75rem">
-            <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Tier 1 &middot; up to 5 seats</div>
-            <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.15rem">Small Team</div>
-            <div class="product-price" style="color:var(--gold-lt);margin-bottom:.75rem">$500 / year</div>
-            <ul style="font-size:.82rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.55;padding-left:1.1rem;margin-bottom:0">
-              <li style="margin-bottom:.35rem">Annual Bundle access per seat</li>
-              <li style="margin-bottom:.35rem">60-minute group onboarding call</li>
-              <li style="margin-bottom:.35rem">Dedicated institutional support email</li>
+          <div class="csp-index-95">
+            <div class="product-step csp-index-96">Tier 1 &middot; up to 5 seats</div>
+            <div class="product-name csp-index-97">Small Team</div>
+            <div class="product-price csp-index-98">$500 / year</div>
+            <ul class="csp-index-99">
+              <li class="csp-index-100">Annual Bundle access per seat</li>
+              <li class="csp-index-101">60-minute group onboarding call</li>
+              <li class="csp-index-102">Dedicated institutional support email</li>
               <li>Internal rollout announcement template</li>
             </ul>
           </div>
 
-          <div style="background:rgba(201,151,31,.10);border:1px solid rgba(201,151,31,.30);border-radius:var(--rlg);padding:1.75rem">
-            <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Tier 2 &middot; up to 20 seats</div>
-            <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.15rem">Department</div>
-            <div class="product-price" style="color:var(--gold-lt);margin-bottom:.75rem">$1,500 / year</div>
-            <ul style="font-size:.82rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.55;padding-left:1.1rem;margin-bottom:0">
-              <li style="margin-bottom:.35rem">Everything in Small Team</li>
-              <li style="margin-bottom:.35rem">Quarterly group office hours (4 &times; 45 min)</li>
-              <li style="margin-bottom:.35rem">Up to 3 custom Skills calibrated to your work</li>
+          <div class="csp-index-103">
+            <div class="product-step csp-index-104">Tier 2 &middot; up to 20 seats</div>
+            <div class="product-name csp-index-105">Department</div>
+            <div class="product-price csp-index-106">$1,500 / year</div>
+            <ul class="csp-index-107">
+              <li class="csp-index-108">Everything in Small Team</li>
+              <li class="csp-index-109">Quarterly group office hours (4 &times; 45 min)</li>
+              <li class="csp-index-110">Up to 3 custom Skills calibrated to your work</li>
               <li>Consolidated invoicing</li>
             </ul>
           </div>
 
-          <div style="background:rgba(184,78,104,.10);border:1px solid rgba(184,78,104,.30);border-radius:var(--rlg);padding:1.75rem">
-            <div class="product-step" style="color:var(--gold-lt);margin-bottom:.4rem">Tier 3 &middot; up to 50 seats</div>
-            <div class="product-name" style="color:var(--cream);margin-bottom:.35rem;font-size:1.15rem">Institution</div>
-            <div class="product-price" style="color:var(--gold-lt);margin-bottom:.75rem">$3,000 / year</div>
-            <ul style="font-size:.82rem;color:rgba(250,244,225,.72);font-weight:300;line-height:1.55;padding-left:1.1rem;margin-bottom:0">
-              <li style="margin-bottom:.35rem">Everything in Department</li>
-              <li style="margin-bottom:.35rem">90-min named training session (live + recorded)</li>
-              <li style="margin-bottom:.35rem">Annual AI workflow audit letter</li>
+          <div class="csp-index-111">
+            <div class="product-step csp-index-112">Tier 3 &middot; up to 50 seats</div>
+            <div class="product-name csp-index-113">Institution</div>
+            <div class="product-price csp-index-114">$3,000 / year</div>
+            <ul class="csp-index-115">
+              <li class="csp-index-116">Everything in Department</li>
+              <li class="csp-index-117">90-min named training session (live + recorded)</li>
+              <li class="csp-index-118">Annual AI workflow audit letter</li>
               <li>Expedited response window (1 business day)</li>
             </ul>
           </div>
 
         </div>
 
-        <p style="font-size:.85rem;color:rgba(250,244,225,.55);font-style:italic;margin-bottom:1.25rem">Above 50 seats: enterprise tier, custom-quoted. All tiers run a 12-month term with renewal capped at +5% year over year.</p>
+        <p class="csp-index-119">Above 50 seats: enterprise tier, custom-quoted. All tiers run a 12-month term with renewal capped at +5% year over year.</p>
 
-        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
-          <a href="/AIAPC-Team-License-Terms-v1.pdf" target="_blank" rel="noopener" style="display:inline-block;padding:.85rem 1.75rem;background:var(--gold);color:var(--cocoa);font-family:var(--ff-h);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s">Standard terms (PDF) &rarr;</a>
-          <button class="notify-link" onclick="showPage('contact');setTimeout(function(){var s=document.getElementById('inquiry-type-select');if(s){s.value='institutional';s.scrollIntoView({behavior:'smooth',block:'center'});}},200)" style="color:var(--gold-lt);background:transparent;border:1px solid rgba(201,151,31,.4);padding:.85rem 1.75rem;font-family:var(--ff-h);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;cursor:pointer">Institutional inquiry &rarr;</button>
+        <div class="csp-index-120">
+          <a href="/license" target="_blank" rel="noopener" class="csp-index-121">Standard terms (PDF) &rarr;</a>
+          <button class="notify-link csp-index-122" data-action="action-57">Institutional inquiry &rarr;</button>
         </div>
       </div>
 
@@ -950,17 +665,17 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   </section>
 
   <!-- EDUCATIONAL EDITIONS -->
-  <section class="sec" style="background:var(--cream)">
+  <section class="sec csp-index-123">
     <div class="sec-in">
       <div class="sec-label">Educational Editions</div>
       <h2 class="sec-h">Published work,<br>packaged for teaching.</h2>
       <p class="sec-p">Published articles from active research and journalism in cannabis law, psychedelic medicine, and biophilic design — each paired with a teaching apparatus: discussion questions tied to specific claims, case studies from the legal and scientific record, and framework summaries for seminar or lecture use. Priced by audience type so the same content reaches undergraduate and doctoral programs at the appropriate rate.</p>
       <div class="ed-table">
         <div class="ed-hd">
-          <div class="product-step" style="margin-bottom:.4rem">Pricing by audience</div>
-          <div class="product-name" style="margin-bottom:.35rem">Four tiers. Same content.</div>
-          <p style="font-size:.82rem;color:var(--cocoa-mute);font-weight:300;margin-bottom:.75rem">The PDF is the same. The price reflects the institution using it.</p>
-          <p style="font-size:.8rem;color:var(--cocoa-mute);font-weight:300">Instructors: <a onclick="showPage('contact')" style="color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:2px">request a complimentary review copy via the contact form</a> — mention your institution and course in the message. · Site licenses for 20+ students available.</p>
+          <div class="product-step csp-index-124">Pricing by audience</div>
+          <div class="product-name csp-index-125">Four tiers. Same content.</div>
+          <p class="csp-index-126">The PDF is the same. The price reflects the institution using it.</p>
+          <p class="csp-index-127">Instructors: <a data-action="action-59" class="csp-index-128">request a complimentary review copy via the contact form</a> — mention your institution and course in the message. · Site licenses for 20+ students available.</p>
         </div>
         <div class="ed-tiers">
           <div class="ed-tier"><div class="ed-lbl">Undergrad</div><div class="ed-price">$25</div></div>
@@ -968,12 +683,12 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
           <div class="ed-tier"><div class="ed-lbl">JD / Law</div><div class="ed-price">$38</div></div>
           <div class="ed-tier"><div class="ed-lbl">Doctoral</div><div class="ed-price">$45</div></div>
         </div>
-        <div style="padding:1.25rem 1.75rem;border-top:1px solid var(--border-lt);background:rgba(201,151,31,.03);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div class="csp-index-129">
           <div>
-            <div style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem">Site License</div>
-            <div style="font-size:.82rem;color:var(--cocoa-mid);font-weight:300">20+ students &middot; Same PDF + apparatus &middot; No per-student fee</div>
+            <div class="csp-index-130">Site License</div>
+            <div class="csp-index-131">20+ students &middot; Same PDF + apparatus &middot; No per-student fee</div>
           </div>
-          <button class="btn btn-outline-gold" onclick="showPage('contact')">Inquire about site license &rarr;</button>
+          <button class="btn btn-outline-gold" data-action="action-61">Inquire about site license &rarr;</button>
         </div>
       </div>
     </div>
@@ -986,8 +701,8 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
 <div id="page-who" class="page">
   <section class="about-hero">
     <div class="page-hero-in">
-      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">Who We Are</div>
-      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4.5rem)">Two people.<br><em>Both practitioners.</em></h1>
+      <div class="sec-label csp-index-132">Who We Are</div>
+      <h1 class="hero-h csp-index-133">Two people.<br><em>Both practitioners.</em></h1>
       <blockquote class="mission-q">
         "AI literacy isn't about knowing every tool. It's about having the mental model to evaluate any tool — and the judgment to know when not to use one."
       </blockquote>
@@ -996,7 +711,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   </section>
 
   <!-- DIVISION OF LABOR -->
-  <section class="sec" style="background:var(--cream)">
+  <section class="sec csp-index-134">
     <div class="sec-in">
       <div class="sec-label">How We Work</div>
       <h2 class="sec-h">Different lanes.<br>One standard.</h2>
@@ -1029,13 +744,13 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   </section>
 
   <!-- FULL BIOS -->
-  <section class="sec" style="background:var(--cream-mid)">
+  <section class="sec csp-index-135">
     <div class="sec-in">
       <div class="sec-label">The People</div>
       <h2 class="sec-h">Full bios.</h2>
 
       <!-- RN Collins -->
-      <div style="margin-bottom:3rem;max-width:760px">
+      <div class="csp-index-136">
         <div class="bio-init rn">RN</div>
         <div class="bio-name">RN Collins</div>
         <span class="bio-role">Legal · Scientific · Strategic — Newsletter Author</span>
@@ -1049,7 +764,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
           <li>Published: Fat Nugs Magazine, Cannabis Law Report, Journal of Biophilic Design</li>
           <li>Founder, Aloha AI Consulting</li>
         </ul>
-        <div class="brand-links" style="margin-top:1.25rem">
+        <div class="brand-links csp-index-137">
           <a class="brand-link" href="https://rn-selected-work.vercel.app" target="_blank" rel="noopener">Portfolio &#8599;</a>
           <a class="brand-link" href="https://rncollins.com" target="_blank" rel="noopener">rncollins.com</a>
           <a class="brand-link" href="https://rncollins.com/aloha-ai-consulting" target="_blank" rel="noopener">Aloha AI</a>
@@ -1060,7 +775,7 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
       </div>
 
       <!-- Vanda Collins -->
-      <div style="max-width:760px">
+      <div class="csp-index-138">
         <div class="bio-init vc">VC</div>
         <div class="bio-name">Vanda Collins</div>
         <span class="bio-role">Institutional · Operational · Educator</span>
@@ -1073,8 +788,8 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
           <li>Corporate training and district curriculum licensing</li>
           <li>1:1 AI coaching for organizations</li>
         </ul>
-        <div class="brand-links" style="margin-top:1.25rem;opacity:.55">
-          <span style="font-family:var(--ff-m);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(90,61,34,.5)">Professional links coming soon</span>
+        <div class="brand-links csp-index-139">
+          <span class="csp-index-140">Professional links coming soon</span>
         </div>
       </div>
     </div>
@@ -1083,12 +798,12 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
   <!-- WHY AIAPC -->
   <section class="dark-clip">
     <div class="sec-in">
-      <div class="sec-label" style="color:rgba(201,151,31,.65)">Why This Exists</div>
+      <div class="sec-label csp-index-141">Why This Exists</div>
       <h2 class="sec-h sec-h-lt">Neither of us came<br>from Silicon Valley.</h2>
-      <p class="sec-p sec-p-lt" style="max-width:620px">We came from the fields AI is disrupting: law, medicine, education, research. We know what it feels like to be handed a tool and told to figure it out. AIAPC is the resource we wanted and couldn't find — written by practitioners, for practitioners, without the missionary tone.</p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
-        <button class="btn btn-gold" onclick="showPage('newsletter')">Read the newsletter &rarr;</button>
-        <button class="btn btn-ghost" onclick="showPage('contact')">Get in touch &rarr;</button>
+      <p class="sec-p sec-p-lt csp-index-142">We came from the fields AI is disrupting: law, medicine, education, research. We know what it feels like to be handed a tool and told to figure it out. AIAPC is the resource we wanted and couldn't find — written by practitioners, for practitioners, without the missionary tone.</p>
+      <div class="csp-index-143">
+        <button class="btn btn-gold" data-action="action-63">Read the newsletter &rarr;</button>
+        <button class="btn btn-ghost" data-action="action-65">Get in touch &rarr;</button>
       </div>
     </div>
   </section>
@@ -1100,54 +815,54 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
 <div id="page-contact" class="page">
   <section class="page-hero">
     <div class="page-hero-in">
-      <div class="sec-label" style="color:var(--gold);margin-bottom:1rem">Contact</div>
-      <h1 class="hero-h" style="font-size:clamp(2.5rem,5vw,4rem)">Get in touch.<br><em>We read everything.</em></h1>
-      <p class="hero-sub" style="max-width:480px">Early access, institutional inquiries, press, educator review copies, or just a question — use the form or reach out directly.</p>
+      <div class="sec-label csp-index-144">Contact</div>
+      <h1 class="hero-h csp-index-145">Get in touch.<br><em>We read everything.</em></h1>
+      <p class="hero-sub csp-index-146">Early access, institutional inquiries, press, educator review copies, or just a question — use the form or reach out directly.</p>
     </div>
   </section>
 
-  <section class="sec" style="background:var(--cream)">
+  <section class="sec csp-index-147">
     <div class="sec-in">
 
       <!-- DIRECT CONTACT METHODS -->
-      <div class="sec-label" style="margin-bottom:1rem">Direct</div>
-      <div class="contact-direct-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:820px;margin-bottom:3rem">
+      <div class="sec-label csp-index-148">Direct</div>
+      <div class="contact-direct-grid csp-index-149">
         <div class="aud-card">
-          <div style="font-size:1.4rem;margin-bottom:.65rem">✉️</div>
-          <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Email</div>
-          <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">For anything that doesn't fit a form.</p>
-          <a href="mailto:collins.ra@northeastern.edu" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">collins.ra@northeastern.edu</a>
+          <div class="csp-index-150">✉️</div>
+          <div class="csp-index-151">Email</div>
+          <p class="csp-index-152">For anything that doesn't fit a form.</p>
+          <a href="mailto:collins.ra@northeastern.edu" class="csp-index-153">collins.ra@northeastern.edu</a>
         </div>
         <div class="aud-card">
-          <div style="font-size:1.4rem;margin-bottom:.65rem">🐦</div>
-          <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">Twitter / X</div>
-          <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">Newsletter updates and AI news filtered for professionals.</p>
-          <a href="https://twitter.com/aicakeweekly" target="_blank" rel="noopener" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">@aicakeweekly</a>
+          <div class="csp-index-154">🐦</div>
+          <div class="csp-index-155">Twitter / X</div>
+          <p class="csp-index-156">Newsletter updates and AI news filtered for professionals.</p>
+          <a href="https://twitter.com/aicakeweekly" target="_blank" rel="noopener" class="csp-index-157">@aicakeweekly</a>
         </div>
         <div class="aud-card">
-          <div style="font-size:1.4rem;margin-bottom:.65rem">👤</div>
-          <div style="font-family:var(--ff-h);font-size:.82rem;font-weight:600;color:var(--cocoa);margin-bottom:.35rem">RN on X</div>
-          <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;font-weight:300;margin-bottom:.65rem">RN's personal feed — AI, law, neuroscience, research.</p>
-          <a href="https://twitter.com/rn_collins" target="_blank" rel="noopener" style="font-family:var(--ff-m);font-size:.67rem;letter-spacing:.06em;color:var(--gold);text-decoration:none">@rn_collins</a>
+          <div class="csp-index-158">👤</div>
+          <div class="csp-index-159">RN on X</div>
+          <p class="csp-index-160">RN's personal feed — AI, law, neuroscience, research.</p>
+          <a href="https://twitter.com/rn_collins" target="_blank" rel="noopener" class="csp-index-161">@rn_collins</a>
         </div>
       </div>
 
       <!-- CONTACT FORM -->
-      <div class="sec-label" style="margin-bottom:1rem">Send a Message</div>
-      <form id="contact-form" style="max-width:680px" onsubmit="handleContactSubmit(event)">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div class="sec-label csp-index-162">Send a Message</div>
+      <form id="contact-form" class="csp-index-163" data-event-1="">
+        <div class="csp-index-164">
           <div>
-            <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-name">Name</label>
-            <input id="cf-name" name="name" type="text" required placeholder="Your name" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+            <label class="csp-index-165" for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" required placeholder="Your name" class="csp-index-166" data-event-2="" data-event-3="">
           </div>
           <div>
-            <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-email">Email</label>
-            <input id="cf-email" name="email" type="email" required placeholder="you@example.com" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+            <label class="csp-index-167" for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" required placeholder="you@example.com" class="csp-index-168" data-event-4="" data-event-5="">
           </div>
         </div>
-        <div style="margin-bottom:1rem">
-          <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="inquiry-type-select">Inquiry type</label>
-          <select id="inquiry-type-select" name="inquiry_type" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;appearance:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+        <div class="csp-index-169">
+          <label class="csp-index-170" for="inquiry-type-select">Inquiry type</label>
+          <select id="inquiry-type-select" name="inquiry_type" class="csp-index-171" data-event-6="" data-event-7="">
             <option value="">Select one…</option>
             <option value="early-access">Early access / notify me at launch</option>
             <option value="institutional">Institutional or team inquiry</option>
@@ -1156,13 +871,13 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
             <option value="general">General question</option>
           </select>
         </div>
-        <div style="margin-bottom:1.5rem">
-          <label style="display:block;font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa-mute);margin-bottom:.4rem" for="cf-message">Message</label>
-          <textarea id="cf-message" name="message" required rows="5" placeholder="Your message…" style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--r);font-family:var(--ff-b);font-size:.9rem;background:var(--cream-card);color:var(--cocoa);outline:none;resize:vertical;transition:border-color .2s;min-height:120px" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+        <div class="csp-index-172">
+          <label class="csp-index-173" for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required rows="5" placeholder="Your message…" class="csp-index-174" data-event-8="" data-event-9=""></textarea>
         </div>
-        <p style="font-size:.78rem;color:var(--cocoa-mute);line-height:1.5;margin-bottom:1rem">Submitting prepares an addressed draft in your email application. The website does not receive it until you review and send that email. See the <a href="/privacy">Privacy Policy</a>.</p><div id="cf-status" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:var(--r);font-family:var(--ff-m);font-size:.72rem;letter-spacing:.06em"></div>
+        <p class="csp-index-175">Submitting prepares an addressed draft in your email application. The website does not receive it until you review and send that email. See the <a href="/privacy">Privacy Policy</a>.</p><div id="cf-status" class="csp-index-176" role="status" aria-live="polite"></div>
         <button type="submit" class="btn btn-gold">Send message &rarr;</button>
-        <p style="font-family:var(--ff-m);font-size:.61rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cocoa-mute);margin-top:1rem">We aim to respond within 1–2 business days.</p>
+        <p class="csp-index-177">We aim to respond within 1–2 business days.</p>
       </form>
     </div>
   </section>
@@ -1180,11 +895,11 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <div>
       <div class="footer-col-h">Navigate</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('home')">Home</a></li>
-        <li><a onclick="showPage('newsletter')">Newsletter</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
-        <li><a onclick="showPage('who')">Who We Are</a></li>
-        <li><a onclick="showPage('contact')">Contact</a></li>
+        <li><a data-action="action-67">Home</a></li>
+        <li><a data-action="action-69">Newsletter</a></li>
+        <li><a data-action="action-71">Products</a></li>
+        <li><a data-action="action-73">Who We Are</a></li>
+        <li><a data-action="action-75">Contact</a></li>
       </ul>
     </div>
     <div>
@@ -1197,120 +912,21 @@ body { font-family: var(--ff-b); background: var(--cream); color: var(--cocoa); 
     <div>
       <div class="footer-col-h">Legal</div>
       <ul class="footer-links">
-        <li><a href="/AIAPC-Team-License-Terms-v1.pdf" target="_blank" rel="noopener">License Terms</a></li>
+        <li><a href="/license" target="_blank" rel="noopener">License Terms</a></li>
         <li><a href="/privacy">Privacy Policy</a></li>
         <li><a href="/terms">Website Terms</a></li>
-        <li><a onclick="showPage('contact')">Contact</a></li>
+        <li><a data-action="action-77">Contact</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bot">
     <span class="footer-legal">&copy; 2024&ndash;2026 RN Collins &amp; Vanda Collins. AI is a Piece of Cake. All rights reserved.</span>
-    <span class="footer-legal">Targeting November 2026 &middot; <a onclick="showPage('contact')" style="color:inherit;cursor:pointer">Get early access &rarr;</a></span>
+    <span class="footer-legal">Targeting November 2026 &middot; <a data-action="action-79" class="csp-index-178">Get early access &rarr;</a></span>
   </div>
 </footer>
 
-<script>
-// ── PAGE ROUTER ──
-var pages = ['home','newsletter','products','who','contact'];
 
-function showPage(id, options) {
-  options = options || {};
-  if (pages.indexOf(id) === -1) { id = 'home'; }
-  pages.forEach(function(p) {
-    var el = document.getElementById('page-' + p);
-    var nav = document.getElementById('nav-' + p);
-    if (el) { el.classList.remove('active'); el.setAttribute('aria-hidden', 'true'); }
-    if (nav) { nav.classList.remove('active'); nav.removeAttribute('aria-current'); }
-  });
-  var target = document.getElementById('page-' + id);
-  var navTarget = document.getElementById('nav-' + id);
-  if (target) {
-    target.classList.add('active');
-    target.setAttribute('aria-hidden', 'false');
-    target.setAttribute('tabindex', '-1');
-  }
-  if (navTarget) { navTarget.classList.add('active'); navTarget.setAttribute('aria-current', 'page'); }
-  closeMobile();
-  window.scrollTo({ top: 0, behavior: options.instant ? 'auto' : 'smooth' });
-  var nextHash = '#' + id;
-  if (options.history === 'replace') {
-    history.replaceState({ page: id }, '', nextHash);
-  } else if (options.history !== 'none' && window.location.hash !== nextHash) {
-    history.pushState({ page: id }, '', nextHash);
-  }
-  if (target && !options.skipFocus) {
-    window.setTimeout(function() { target.focus({ preventScroll: true }); }, options.instant ? 0 : 180);
-  }
-}
-
-// ── MOBILE NAV TOGGLE ──
-function closeMobile() {
-  var nav = document.getElementById('mobileNav');
-  var btn = document.getElementById('hamburger');
-  if (!nav || !btn) { return; }
-  nav.classList.remove('open');
-  nav.setAttribute('aria-hidden', 'true');
-  btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('aria-label', 'Open navigation menu');
-}
-
-function toggleMobile() {
-  var nav = document.getElementById('mobileNav');
-  var btn = document.getElementById('hamburger');
-  var willOpen = !nav.classList.contains('open');
-  nav.classList.toggle('open', willOpen);
-  nav.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
-  btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-  btn.setAttribute('aria-label', willOpen ? 'Close navigation menu' : 'Open navigation menu');
-}
-
-// ── SUBSCRIBE CTA ──
-function goSubscribe() {
-  showPage('contact');
-  setTimeout(function(){var select=document.getElementById('inquiry-type-select');if(select){select.value='early-access';select.focus();}},100);
-}
-
-// ── CONTACT FORM HANDLER ──
-function handleContactSubmit(e) {
-  e.preventDefault();
-  var form=e.target,status=document.getElementById('cf-status');
-  var name=document.getElementById('cf-name').value.trim();
-  var email=document.getElementById('cf-email').value.trim();
-  var inquiryType=document.getElementById('inquiry-type-select').value||'general';
-  var message=document.getElementById('cf-message').value.trim();
-  var subject='AIAPC Inquiry: '+inquiryType;
-  var body='Name: '+name+'\nEmail: '+email+'\nInquiry Type: '+inquiryType+'\n\nMessage:\n'+message;
-  window.location.href='mailto:collins.ra@northeastern.edu?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  status.style.display='block';status.style.background='rgba(82,112,85,.12)';status.style.color='var(--sage)';status.style.border='1px solid rgba(82,112,85,.3)';
-  status.textContent='Email draft opened. Your message has not been sent until you review and send it in your email application.';
-}
-
-// ── HASH ROUTING ON LOAD ──
-(function() {
-  var hash = window.location.hash.replace('#', '');
-  var initialPage = hash && pages.indexOf(hash) !== -1 ? hash : 'home';
-  showPage(initialPage, { history: 'replace', instant: true, skipFocus: true });
-})();
-
-window.addEventListener('popstate', function() {
-  var hash = window.location.hash.replace('#', '');
-  showPage(pages.indexOf(hash) !== -1 ? hash : 'home', { history: 'none', instant: true });
-});
-
-// ── ACTIVE NAV ON SCROLL (desktop) ──
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('a[onclick]').forEach(function(el){el.setAttribute('role','button');el.setAttribute('tabindex','0');el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});});
-  // Close mobile nav on outside click
-  document.addEventListener('click', function(e) {
-    var nav = document.getElementById('mobileNav');
-    var btn = document.getElementById('hamburger');
-    if (nav && nav.classList.contains('open') && !nav.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-      closeMobile();
-    }
-  });
-});
-</script>
-<div style="text-align:center;padding:.75rem 1rem;font-size:.7rem;border-top:1px solid rgba(0,0,0,.1);margin-top:2rem">Built by <a href="https://rn-selected-work.vercel.app" target="_blank" rel="noopener" style="color:#1B7A68;text-decoration:none">RN Builds</a> — explore all AI tools and projects.</div>
-</body>
+<div class="csp-index-179">Built by <a href="https://rn-selected-work.vercel.app" target="_blank" rel="noopener" class="csp-index-180">RN Builds</a> — explore all AI tools and projects.</div>
+<script src="/index.js" defer></script>
+<script src="/pwa-register.js" defer></script></body>
 </html>
